@@ -1,10 +1,8 @@
-@value white, black from 'src/theme.module.css';
-
 .directory {
-	composes: inset from 'src/theme.module.css';
+	composes: inset from '@/app/page.module.css';
 	flex: 1;
-	background-color: white;
-	color: black;
+	background-color: var(--white);
+	color: var(--black);
 }
 
 .appIcon {

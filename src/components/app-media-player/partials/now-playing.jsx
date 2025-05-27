@@ -1,11 +1,9 @@
+import Image from 'next/image';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import placeholderIcon from 'static/img/media-player/blank-cd.png';
-import playIcon from 'static/img/media-player/play.svg';
-import pauseIcon from 'static/img/media-player/pause.svg';
-import skipNextIcon from 'static/img/media-player/skip-next.svg';
-import skipPrevIcon from 'static/img/media-player/skip-prev.svg';
+import {Button} from '@/components/button';
+
 import styles from './now-playing.module.css';
 
 export default function NowPlaying(props) {
@@ -14,9 +12,11 @@ export default function NowPlaying(props) {
 	return (
 		<div className={styles.nowPlaying}>
 			<img
-				src={song ? song.cover : placeholderIcon}
+				src={song ? song.cover : '/img/media-player/blank-cd.png'}
 				className={styles.album}
 				alt=""
+				width={80}
+				height={80}
 			/>
 			<div className={styles.songInfo}>
 				<div className={styles.song}>
@@ -27,37 +27,57 @@ export default function NowPlaying(props) {
 				</div>
 				{ song ? (
 					<div className={styles.controls}>
-						<button
+						<Button
 							onClick={props.onPlayPrev}
 							className={styles.mediaButton}
 							aria-label="play previous song"
 						>
-							<img src={skipPrevIcon} alt="play previous song" />
-						</button>
+							<Image
+								src="/img/media-player/skip-prev.svg"
+								alt=""
+								width={24}
+								height={24}
+							/>
+						</Button>
 						{ props.paused ? (
-							<button
+							<Button
 								onClick={props.onPlay}
 								className={styles.mediaButton}
 								aria-label="play"
 							>
-								<img src={playIcon}/>
-							</button>
+								<Image
+									src="/img/media-player/play.svg"
+									alt=""
+									width={24}
+									height={24}
+								/>
+							</Button>
 						) : (
-							<button
+							<Button
 								onClick={props.onPause}
 								className={styles.mediaButton}
 								aria-label="pause"
 							>
-								<img src={pauseIcon} alt="pause" />
-							</button>
+								<Image
+									src="/img/media-player/pause.svg"
+									alt=""
+									width={24}
+									height={24}
+								/>
+							</Button>
 						) }
-						<button
+						<Button
 							onClick={props.onPlayNext}
 							className={styles.mediaButton}
 							aria-label="play next song"
 						>
-							<img src={skipNextIcon} alt="play next song" />
-						</button>
+							<Image
+								src="/img/media-player/skip-next.svg"
+								alt=""
+								width={24}
+								height={24}
+							/>
+						</Button>
 					</div>
 				) : null }
 			</div>

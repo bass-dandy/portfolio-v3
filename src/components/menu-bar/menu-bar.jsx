@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
 import PropTypes from 'prop-types';
-import DropdownMenu from './partials/dropdown-menu';
-import useClickOutside from 'src/hooks/useClickOutside';
 
+import useClickOutside from '@/hooks/useClickOutside';
+
+import DropdownMenu from './partials/dropdown-menu';
 import styles from './menu-bar.module.css';
 
 export default function MenuBar(props) {

@@ -1,10 +1,8 @@
-@value black, white, grayPrimary, grayLight, bluePrimary from 'src/theme.module.css';
-
 .wrapper {
-	composes: inset from 'src/theme.module.css';
+	composes: inset from '@/app/page.module.css';
 	flex: 1;
 	margin: 0 5px;
-	background-color: grayLight;
+	background-color: var(--grayLight);
 	overflow: auto;
 }
 
@@ -32,16 +30,16 @@
 }
 
 .playlist tr {
-	border-bottom: 1px solid grayPrimary;
+	border-bottom: 1px solid var(--grayPrimary);
 }
 
 .playlistItem.selected {
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 }
 
 .playlistItem:hover {
-	background-color: bluePrimary;
-	color: white;
+	background-color: var(--bluePrimary);
+	color: var(--white);
 }
 
 .trackNumber {
@@ -66,6 +64,7 @@
 .trackButton img {
 	height: 1rem;
 	vertical-align: middle;
+	pointer-events: none;
 }
 
 .playlistItem:hover .trackButtons,

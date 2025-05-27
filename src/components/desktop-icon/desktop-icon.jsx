@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {useDispatch} from 'react-redux';
 
-import {launchApp} from 'src/redux/windows';
+import {launchApp} from '@/redux/windows';
 
 import styles from './desktop-icon.module.css';
 

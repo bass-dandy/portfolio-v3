@@ -8,6 +8,7 @@
 .icon {
 	height: 1rem;
 	margin-right: 5px;
+	pointer-events: none;
 }
 
 .title {

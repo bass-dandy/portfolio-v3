@@ -1,0 +1,29 @@
+body.keyboardAccessible *:focus {
+	outline: 2px solid red;
+}
+
+body:not(.keyboardAccessible) *:focus {
+	outline: 0;
+}
+
+.outset {
+	border: 2px outset;
+	border-top-color: white;
+	border-left-color: white;
+	border-right-color: black;
+	border-bottom-color: black;
+	background-color: var(--grayPrimary);
+}
+
+.outset-active-inset {
+	composes: outset;
+}
+
+.inset, .outset-active-inset:active {
+	border: 2px inset;
+	border-top-color: var(--grayInset);
+	border-left-color: var(--grayInset);
+	border-right-color: var(--white);
+	border-bottom-color: var(--white);
+	background-color: var(--grayLight);
+}

@@ -1,0 +1,3 @@
+.button {
+	composes: outset-active-inset from '@/app/page.module.css';
+}

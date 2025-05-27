@@ -6,6 +6,8 @@
 }
 
 .startButton {
+	composes: outset from '@/app/page.module.css';
+
 	height: 100%;
 	padding: 3px;
 	box-sizing: border-box;
@@ -16,11 +18,13 @@
 }
 
 .active {
-	composes: inset from 'src/theme.module.css';
+	composes: inset from '@/app/page.module.css';
 }
 
 .startButton img {
 	height: 100%;
-	margin-right: 3px;
+	width: auto;
+	margin-right: 8px;
 	vertical-align: middle;
+	pointer-events: none;
 }

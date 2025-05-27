@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import React from 'react';
 import {useDispatch} from 'react-redux';
 
-import {launchApp} from 'src/redux/windows';
-import {Resume, Projects, MediaPlayer} from 'src/apps';
+import {launchApp} from '@/redux/windows';
+import {Resume, Projects, MediaPlayer} from '@/apps';
 
-import headshotSrc from 'static/img/about-me/headshot.png';
 import styles from './me.module.css';
 
 function AppLink({children, app}) {
@@ -23,9 +23,11 @@ function AppLink({children, app}) {
 export default function Me() {
 	return (
 		<>
-			<img
-				src={headshotSrc}
+			<Image
+				src="/img/about-me/headshot.png"
 				alt="photo of some nerd (me)"
+				width={442}
+				height={717}
 				className={styles.headshot}
 			/>
 			<p className={styles.paragraph}>

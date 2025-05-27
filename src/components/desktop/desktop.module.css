@@ -1,10 +1,8 @@
-@value taskbarHeight from 'src/theme.module.css';
-
 .desktop {
 	position: fixed;
 	top: 0;
 	right: 0;
-	bottom: taskbarHeight;
+	bottom: var(--taskbarHeight);
 	left: 0;
 }
 

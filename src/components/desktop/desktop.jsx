@@ -1,13 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 
-import Apps from 'src/apps';
-import Wallpaper from './partials/wallpaper';
-import Window from './partials/window';
-import DesktopIcon from '../desktop-icon';
-
-import styles from './desktop.module.css';
-
+import Apps from '@/apps';
 import {
 	blurApps,
 	focusApp,
@@ -15,7 +9,12 @@ import {
 	maximizeApp,
 	minimizeApp,
 	unmaximizeApp
-} from 'src/redux/windows';
+} from '@/redux/windows';
+
+import Wallpaper from './partials/wallpaper';
+import Window from './partials/window';
+import DesktopIcon from '../desktop-icon';
+import styles from './desktop.module.css';
 
 function Desktop(props) {
 	const container = useRef(null);

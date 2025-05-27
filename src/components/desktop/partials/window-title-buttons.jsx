@@ -1,10 +1,8 @@
+import Image from 'next/image';
 import React, {forwardRef, useRef, useImperativeHandle} from 'react';
 import PropTypes from 'prop-types';
 
-import MinimizeIcon from 'static/img/window/minimize.png';
-import MaximizeIcon from 'static/img/window/maximize.png';
-import RestoreDownIcon from 'static/img/window/restore_down.png';
-import CloseIcon from 'static/img/window/close.png';
+import {Button} from '@/components/button';
 
 import styles from './window-title-buttons.module.css';
 
@@ -19,33 +17,35 @@ const TitleButtons = forwardRef((props, ref) => {
 
 	return (
 		<div className={styles.titleButtons}>
-			<button
+			<Button
 				className={styles.minimize}
 				onClick={props.onMinimize}
 				aria-label="minimize window"
 			>
-				<img src={MinimizeIcon} alt=""/>
-			</button>
+				<Image src="/img/window/minimize.png" alt="" width={50} height={50} />
+			</Button>
 			{ props.canMaximize ? (
-				<button
+				<Button
 					className={styles.maximize}
 					onClick={props.onMaximize}
 					aria-label="maximize window"
 				>
-					<img
-						src={props.isMaximized ? RestoreDownIcon : MaximizeIcon}
+					<Image
+						src={props.isMaximized ? '/img/window/restore_down.png' : '/img/window/maximize.png'}
 						alt=""
+						width={50}
+						height={50}
 					/>
-				</button>
+				</Button>
 			) : null }
-			<button
+			<Button
 				className={styles.close}
 				onClick={props.onClose}
 				ref={closeButton}
 				aria-label="close window"
 			>
-				<img src={CloseIcon} alt=""/>
-			</button>
+				<Image src="/img/window/close.png" alt="" width={50} height={50} />
+			</Button>
 		</div>
 	);
 });

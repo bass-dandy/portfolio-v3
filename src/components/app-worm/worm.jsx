@@ -1,54 +1,51 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import WormGame from '@bass_dandy/w0rm';
 import Controls from './partials/controls';
 import styles from './worm.module.css';
 
-export default class Worm extends React.Component {
+const Worm = ({isFocused}) => {
+	const [score, setScore] = useState(0);
+	const [game, setGame] = useState(null);
 
-	state = {
-		game: null,
-		score: 0
-	}
+	const canvasRef = useRef();
 
-	componentDidMount() {
-		const game = new WormGame(
-			this.canvas,
-			(score) => this.setState({score})
-		);
-		game.enableKeyboardControls();
-		this.setState({game});
-	}
+	useLayoutEffect(() => {
+		const wormGame = new WormGame(canvasRef.current, setScore)
+		wormGame.enableKeyboardControls();
+		setGame(wormGame);
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.isFocused && !this.props.isFocused) {
-			this.state.game.pause();
-			this.state.game.disableKeyboardControls();
-		} else if (!prevProps.isFocused && this.props.isFocused) {
-			this.state.game.enableKeyboardControls();
+		return () => {
+			wormGame.destroy();
+			setGame(null);
+		};
+	}, [setScore]);
+
+	useEffect(() => {
+		if (!isFocused) {
+			game?.pause();
+			game?.disableKeyboardControls();
+		} else {
+			game?.enableKeyboardControls();
 		}
-	}
+	}, [game, isFocused]);
 
-	componentWillUnmount() {
-		this.state.game.end();
-	}
-
-	render() {
-		return (
-			<div className={styles.worm}>
-				<div className={styles.scoreContainer}>
-					Score:
-					<div className={styles.score}>
-						{this.state.score * 100}
-					</div>
+	return (
+		<div className={styles.worm}>
+			<div className={styles.scoreContainer}>
+				Score:
+				<div className={styles.score}>
+					{score * 100}
 				</div>
-				<canvas
-					className={styles.canvas}
-					ref={(e) => { this.canvas = e; }}
-				/>
-				{ this.state.game ? (
-					<Controls game={this.state.game}/>
-				) : null }
 			</div>
-		);
-	}
+			<canvas
+				className={styles.canvas}
+				ref={canvasRef}
+				width={400}
+				height={400}
+			/>
+			{game ? <Controls game={game} /> : null}
+		</div>
+	);
 }
+
+export default Worm;

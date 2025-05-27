@@ -1,45 +1,31 @@
 {
-  "name": "portfolio-v3",
-  "version": "1.0.0",
-  "author": "Christian Dinh",
-  "description": "Web portfolio",
-  "license": "ISC",
-  "main": "src/index.jsx",
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bass-dandy/portfolio-v3.git"
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@bass_dandy/w0rm": "^1.0.1",
+    "@bass_dandy/w0rm": "2.1.0",
     "classnames": "^2.2.6",
+    "next": "15.1.8",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.0",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.1.0",
-    "css-loader": "^4.2.0",
-    "eslint": "^7.6.0",
-    "eslint-import-resolver-webpack": "^0.12.2",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.5",
-    "extract-css-chunks-webpack-plugin": "^4.7.5",
-    "file-loader": "^6.0.0",
-    "html-webpack-plugin": "^4.3.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.8",
+    "@eslint/eslintrc": "^3"
   }
 }

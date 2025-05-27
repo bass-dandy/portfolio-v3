@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {
-	reset,
 	navigate,
 	setUrl,
 	goForward,
@@ -21,10 +20,6 @@ class WebBrowser extends React.Component {
 		isDragging: PropTypes.bool,
 		isResizing: PropTypes.bool
 	};
-
-	componentWillUnmount() {
-		this.props.reset();
-	}
 
 	render() {
 		return (
@@ -76,7 +71,6 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
 	setUrl,
-	reset,
 	navigate,
 	goForward,
 	goBackward

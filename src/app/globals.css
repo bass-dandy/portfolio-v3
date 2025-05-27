@@ -1,0 +1,48 @@
+:root {
+  --grayPrimary: rgb(192, 192, 192);
+  --grayLight: rgb(234, 234, 234);
+  --grayInset: rgb(142, 142, 141);
+  --black: rgb(0, 0, 0);
+  --white: rgb(255, 255, 255);
+  --teal: rgb(0, 128, 129);
+  --bluePrimary: rgb(1, 0, 129);
+  --blueLink: #531fff;
+  --accent1: #ffc0cb;
+  --accent2: #e9ffe9;
+
+  --taskbarHeight: 35px;
+}
+
+@font-face {
+	font-family: wendy;
+	src: url(/fonts/wendy.ttf);
+}
+
+@font-face {
+	font-family: perfect-dos;
+	src: url(/fonts/perfect-dos.ttf);
+}
+
+@font-face {
+	font-family: pixel-arial;
+	src: url(/fonts/pixel-arial.ttf);
+}
+
+* {
+	user-select: none;
+}
+
+body {
+	margin: 0;
+	font-family: pixel-arial;
+	overflow: hidden;
+}
+
+a {
+	color: var(--blueLink);
+	text-decoration: underline dotted;
+}
+
+button {
+	cursor: pointer;
+}

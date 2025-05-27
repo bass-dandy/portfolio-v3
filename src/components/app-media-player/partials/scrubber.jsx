@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import {clamp} from 'src/util';
+import {clamp} from '@/util';
+
 import styles from './scrubber.module.css';
 
 function formatTime(seconds) {

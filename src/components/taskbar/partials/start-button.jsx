@@ -1,11 +1,11 @@
+import Image from 'next/image';
 import React, {useState, useRef} from 'react';
 import {useDispatch} from 'react-redux';
 import classnames from 'classnames';
 import StartMenu from './start-menu';
 
-import {launchApp} from 'src/redux/windows';
+import {launchApp} from '@/redux/windows';
 
-import StartIcon from 'static/img/start.png';
 import styles from './start-button.module.css';
 
 const ESC = 27;
@@ -33,7 +33,7 @@ export default function StartButton() {
 				onClick={() => setIsOpen(!isOpen)}
 				aria-label="open app drawer"
 			>
-				<img src={StartIcon} alt=""/>
+				<Image src="/img/start.png" alt="" width={178} height={178} />
 				Start
 			</button>
 			{ isOpen ? (

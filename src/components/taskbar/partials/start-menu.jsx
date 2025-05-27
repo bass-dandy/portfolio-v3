@@ -1,10 +1,10 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 
+import useClickOutside from '@/hooks/useClickOutside';
+
 import Apps from '../../../apps';
 import StartMenuAppList from './start-menu-app-list';
-import useClickOutside from 'src/hooks/useClickOutside';
-
 import styles from './start-menu.module.css';
 
 export default function StartMenu(props) {

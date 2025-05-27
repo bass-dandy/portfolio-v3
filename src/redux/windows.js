@@ -1,4 +1,4 @@
-import {WebBrowser} from 'src/apps';
+import {WebBrowser} from '@/apps';
 import * as webBrowserActions from './web-browser';
 
 const BLUR_APPS = 'apps/BLUR_APPS';

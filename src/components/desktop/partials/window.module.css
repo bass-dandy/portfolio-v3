@@ -1,15 +1,13 @@
-@value grayPrimary, grayInset, white, accent1, accent2, mobileCutoff from 'src/theme.module.css';
-
 @keyframes fadein {
 	to { opacity: 1; }
 }
 
 .window {
-	composes: outset from 'src/theme.module.css';
+	composes: outset from '@/app/page.module.css';
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 	box-sizing: border-box;
 	max-height: 100%;
 	opacity: 0;
@@ -33,16 +31,16 @@
 }
 
 .focused .header {
-	background: linear-gradient(90deg, accent1, accent2 105%);
-	color: white;
+	background: linear-gradient(90deg, var(--accent1), var(--accent2) 105%);
+	color: var(--white);
 }
 
 .header {
 	display: flex;
 	align-items: center;
 	margin: 2px;
-	background-color: grayInset;
-	color: grayPrimary;
+	background-color: var(--grayInset);
+	color: var(--grayPrimary);
 }
 
 .content {
@@ -57,7 +55,7 @@
 	padding: 2px;
 }
 
-@media only screen and (max-width: mobileCutoff) {
+@media only screen and (max-width: 600px) {
 	.window {
 		top: 0 !important;
 		left: 0 !important;

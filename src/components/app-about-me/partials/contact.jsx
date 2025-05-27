@@ -15,7 +15,7 @@ export default function Contact() {
 						href="https://github.com/bass-dandy"
 						target="blank"
 					>
-						my Github profile
+						Github
 					</a>
 				</li>
 				<li>
@@ -23,7 +23,7 @@ export default function Contact() {
 						href="https://www.linkedin.com/in/christiandinh/"
 						target="blank"
 					>
-						my Linkedin profile
+						Linkedin
 					</a>
 				</li>
 			</ul>

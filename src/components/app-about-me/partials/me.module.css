@@ -1,7 +1,6 @@
-@value blueLink from 'src/theme.module.css';
-
 .headshot {
 	width: 150px;
+	height: auto;
 	float: left;
 	margin-right: 10px;
 }
@@ -17,6 +16,6 @@
 	background-color: transparent;
 	font-family: perfect-dos;
 	font-size: 1em;
-	color: blueLink; 
+	color: var(--blueLink); 
 	text-decoration: underline dotted;
 }

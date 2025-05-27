@@ -2,10 +2,10 @@ import React, {useEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 
-import {focusApp} from 'src/redux/windows';
+import {focusApp} from '@/redux/windows';
+
 import Clock from './partials/clock';
 import StartButton from './partials/start-button';
-
 import styles from './taskbar.module.css';
 
 function Taskbar(props) {

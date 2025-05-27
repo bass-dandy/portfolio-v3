@@ -1,5 +1,3 @@
-@value mobileCutoff from 'src/theme.module.css';
-
 .desktopControls {
 	padding-top: 5px;
 	font-size: 0.6rem;
@@ -10,7 +8,7 @@
 }
 
 .controlsTable {
-	composes: inset from 'src/theme.module.css';
+	composes: inset from '@/app/page.module.css';
 	float: right;
 }
 
@@ -100,13 +98,13 @@
 	background-color: #FC6A21;
 }
 
-@media only screen and (max-width: mobileCutoff) {
+@media only screen and (max-width: 600px) {
 	.desktopControls {
 		display: none;
 	}
 }
 
-@media only screen and (min-width: mobileCutoff) {
+@media only screen and (min-width: 600px) {
 	.mobileControls {
 		display: none;
 	}

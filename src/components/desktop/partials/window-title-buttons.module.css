@@ -1,16 +1,14 @@
-@value grayPrimary, mobileCutoff from 'src/theme.module.css';
-
 .titleButtons {
 	display: flex;
 	padding: 3px;
 }
 
 .minimize, .maximize, .close {
-	width: 1rem;
-	height: 1rem;
+	width: 1.2rem;
+	height: 1.2rem;
 	padding: 2px;
 	border-width: 1px;
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 }
 
 .close {
@@ -19,9 +17,11 @@
 
 .minimize img, .maximize img, .close img {
 	height: 100%;
+	width: auto;
+	pointer-events: none;
 }
 
-@media only screen and (max-width: mobileCutoff) {
+@media only screen and (max-width: 600px) {
 	.minimize, .maximize {
 		display: none;
 	}

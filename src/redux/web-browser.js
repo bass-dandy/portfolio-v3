@@ -1,4 +1,3 @@
-const RESET = 'web-browser/RESET';
 const NAVIGATE = 'web-browser/NAVIGATE';
 const SET_URL = 'web-browser/SET_URL';
 const GO_FORWARD = 'web-browser/GO_FORWARD';
@@ -31,9 +30,6 @@ function generateUrl(inputString) {
 
 export default function reducer(state = {...DEFAULT_STATE}, {type, payload}) {
 	switch (type) {
-		case RESET: {
-			return {...DEFAULT_STATE};
-		}
 		case NAVIGATE: {
 			const location = generateUrl(state.url);
 			const newHistory = state.history.slice(0, state.historyIndex + 1);
@@ -77,12 +73,6 @@ export default function reducer(state = {...DEFAULT_STATE}, {type, payload}) {
 		default:
 			return state;
 	}
-}
-
-export function reset() {
-	return {
-		type: RESET
-	};
 }
 
 export function navigate() {

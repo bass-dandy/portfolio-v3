@@ -1,5 +1,3 @@
-@value white from 'src/theme.module.css';
-
 .nowPlaying {
 	/* position and z-index allow this to float above <canvas> element */
 	position: relative;
@@ -25,7 +23,7 @@
 	display: inline-block;
 	padding: 2px;
 	vertical-align: top;
-	color: white;
+	color: var(--white);
 	background-color: rgba(0,0,0,0.5);
 }
 
@@ -52,4 +50,5 @@
 .mediaButton img {
 	height: 1rem;
 	vertical-align: middle;
+	pointer-events: none;
 }

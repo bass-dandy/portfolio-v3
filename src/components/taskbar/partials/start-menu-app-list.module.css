@@ -1,16 +1,14 @@
-@value grayPrimary, white, black, bluePrimary from 'src/theme.module.css';
-
 .appList {
 	flex: 1;
 	padding: 3px;
 	margin: 0;
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 	list-style: none;
-	color: black;
+	color: var(--black);
 }
 
 .floating {
-	composes: outset from 'src/theme.module.css';
+	composes: outset from '@/app/page.module.css';
 	position: absolute;
 	display: none;
 	top: -5px; /* padding plus border */
@@ -28,6 +26,7 @@
 
 .appListItem img {
 	height: 30px;
+	pointer-events: none;
 }
 
 .appName {
@@ -36,8 +35,8 @@
 }
 
 .appListItem:hover {
-	background-color: bluePrimary;
-	color: white;
+	background-color: var(--bluePrimary);
+	color: var(--white);
 }
 
 .appListItem:hover > .appList.floating {

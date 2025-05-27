@@ -1,12 +1,11 @@
+import Image from 'next/image';
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import {download} from 'src/util';
+import {download} from '@/util';
+import {Button} from '@/components/button';
 
-import playIcon from 'static/img/media-player/play.svg';
-import pauseIcon from 'static/img/media-player/pause.svg';
-import downloadIcon from 'static/img/media-player/download.svg';
 import styles from './playlist.module.css';
 
 const ENTER = 13;
@@ -45,31 +44,46 @@ export default function Playlist(props) {
 								</span>
 								<div className={styles.trackButtons}>
 									{ props.paused || song !== props.nowPlaying ? (
-										<button
+										<Button
 											className={styles.trackButton}
 											onClick={() => props.onSelectSong(song)}
 											aria-label={`play ${song.title}`}
 											tabIndex={-1}
 										>
-											<img src={playIcon} alt="play" />
-										</button>
+											<Image
+												src="/img/media-player/play.svg"
+												alt=""
+												width={24}
+												height={24}
+											/>
+										</Button>
 									) : (
-										<button
+										<Button
 											className={styles.trackButton}
 											onClick={props.onPause}
 											aria-label={`pause ${song.title}`}
 											tabIndex={-1}
 										>
-											<img src={pauseIcon} alt="pause" />
-										</button>
+											<Image
+												src="/img/media-player/pause.svg"
+												alt=""
+												width={24}
+												height={24}
+											/>
+										</Button>
 									) }
-									<button
+									<Button
 										className={styles.trackButton}
 										onClick={() => download(song.src)}
 										aria-label={`download ${song.title}`}
 									>
-										<img src={downloadIcon} alt="download" />
-									</button>
+										<Image
+											src="/img/media-player/download.svg"
+											alt=""
+											width={24}
+											height={24}
+										/>
+									</Button>
 								</div>
 							</td>
 							<td className={styles.titleColumn}>

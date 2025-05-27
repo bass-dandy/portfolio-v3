@@ -28,6 +28,6 @@
 }
 
 .frame {
-	composes: inset from 'src/theme.module.css';
+	composes: inset from '@/app/page.module.css';
 	flex: 1;
 }

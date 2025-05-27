@@ -1,9 +1,11 @@
 import React, {useRef} from 'react';
-import {download} from 'src/util';
-import MenuBar from '../menu-bar';
 
-import resumePdf from 'static/img/resume/resume.pdf';
+import {download} from '@/util';
+
+import MenuBar from '../menu-bar';
 import styles from './resume.module.css';
+
+const resumePdf = '/img/resume/resume.pdf';
 
 export default function Resume() {
 	const iframe = useRef(null);

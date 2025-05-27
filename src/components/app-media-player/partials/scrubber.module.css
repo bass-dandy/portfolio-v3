@@ -1,5 +1,3 @@
-@value black, grayPrimary from 'src/theme.module.css';
-
 .scrubber {
 	display: flex;
 	align-items: center;
@@ -19,17 +17,17 @@
 	flex: 1;
 	position: relative;
 	height: 2px;
-	background-color: black;
+	background-color: var(--black);
 }
 
 .playhead {
-	composes: outset from 'src/theme.module.css';
+	composes: outset from '@/app/page.module.css';
 	position: absolute;
 	width: 5px;
 	height: 10px;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 	cursor: grab;
 }
 

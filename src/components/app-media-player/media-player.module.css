@@ -1,11 +1,9 @@
-@value grayPrimary from 'src/theme.module.css';
-
 .mediaPlayer {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	background-color: grayPrimary;
+	background-color: var(--grayPrimary);
 }
 
 .header {
