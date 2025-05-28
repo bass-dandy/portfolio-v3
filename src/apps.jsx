@@ -27,7 +27,7 @@ export const WebBrowser = {
 export const Worm = {
 	name: 'Worm',
 	content: WormApp,
-	iconSrc: '/img/app-icons/w0rm.png',
+	iconSrc: '/img/app-icons/worm.png',
 	resizeDisabled: true
 };
 
@@ -51,36 +51,34 @@ export const MediaPlayer = {
 	minHeight: 300
 };
 
-const linkIcon = '/img/app-icons/link.png';
-
 export const Simpai = {
 	name: 'SimPAI',
 	url: 'https://bass-dandy.github.io/simpai',
-	iconSrc: linkIcon
+	iconSrc: '/img/app-icons/simpai.png',
 };
 
 export const Planechase = {
 	name: 'Planechase',
 	url: 'https://bass-dandy.github.io/planechase',
-	iconSrc: linkIcon
+	iconSrc: '/img/app-icons/planechase.png',
 };
 
 export const PizzaDashPizzaDotPizza = {
 	name: 'Pizza Dash Pizza Dot Pizza',
 	url: 'https://pizza-pizza.pizza',
-	iconSrc: linkIcon
+	iconSrc: '/img/start.png',
 };
 
 export const ACNHChecklists = {
 	name: 'Animal Crossing Checklists',
 	url: 'https://bass-dandy.github.io/acnh-checklists',
-	iconSrc: linkIcon
+	iconSrc: '/img/app-icons/acnh.png',
 };
 
 export const UnifiedSandwichFramework = {
 	name: 'Unified Sandwich Framework',
 	url: 'https://sandwich.one',
-	iconSrc: linkIcon
+	iconSrc: '/img/app-icons/sandwich.png',
 };
 
 export const Projects = {
