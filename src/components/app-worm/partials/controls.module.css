@@ -1,15 +1,30 @@
 .desktopControls {
+	display: flex;
+	justify-content: space-between;
 	padding-top: 5px;
-	font-size: 0.6rem;
+	font-size: 0.75rem;
 }
 
 .desc {
-	float: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.desc ul {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	list-style-type: none;
+	margin: 4px 0 0 0;
+	padding: 0;
+}
+
+.desc li::before {
+	content: "- ";
 }
 
 .controlsTable {
 	composes: inset from '@/app/page.module.css';
-	float: right;
 }
 
 .controlsTable td {

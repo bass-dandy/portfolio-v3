@@ -7,14 +7,19 @@ export default function Controls(props) {
 		<>
 			<div className={styles.desktopControls}>
 				<div className={styles.desc}>
-					<div>
-						A game by Christian Dinh
-					</div>
-					<div>
-						<a href="https://github.com/bass-dandy/w0rm" target="blank">
-							github.com/bass-dandy/w0rm
-						</a>
-					</div>
+					See this project on:
+					<ul>
+						<li>
+							<a href="https://github.com/bass-dandy/w0rm" target="blank">
+								github
+							</a>
+						</li>
+						<li>
+							<a href="https://www.npmjs.com/package/@bass_dandy/w0rm" target="blank">
+								npm
+							</a>
+						</li>
+					</ul>
 				</div>
 				<table className={styles.controlsTable}>
 					<tbody>
