@@ -7,8 +7,9 @@
   --teal: rgb(0, 128, 129);
   --bluePrimary: rgb(1, 0, 129);
   --blueLink: #531fff;
-  --accent1: #ffc0cb;
-  --accent2: #e9ffe9;
+  --mint: #e9ffe9;
+  --pink: #ffc0cb;
+  --pinkDark: #a9037f;
 
   --taskbarHeight: 35px;
 }

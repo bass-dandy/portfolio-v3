@@ -31,8 +31,8 @@
 }
 
 .focused .header {
-	background: linear-gradient(90deg, var(--accent1), var(--accent2) 105%);
-	color: var(--white);
+	background: linear-gradient(90deg, var(--pink), var(--mint) 105%);
+	color: var(--pinkDark);
 }
 
 .header {

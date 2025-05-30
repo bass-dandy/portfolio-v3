@@ -24,7 +24,7 @@
 	position: relative;
 	height: 100%;
 	width: 35px;
-	background: linear-gradient(0deg, var(--accent1), var(--accent2) 115%);
+	background: linear-gradient(0deg, var(--pink), var(--mint) 115%);
 }
 
 .menuLogo::after {
@@ -35,7 +35,7 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: var(--accent1);
+	background-color: var(--pink);
 	opacity: 1;
 	z-index: 1;
 	animation: fadeout 0.2s ease-out 0.2s forwards;
@@ -48,6 +48,6 @@
 	transform: rotate(-90deg);
 	font-family: perfect-dos;
 	font-size: 1.7rem;
-	color: var(--white);
+	color: var(--pinkDark);
 	white-space: nowrap;
 }
