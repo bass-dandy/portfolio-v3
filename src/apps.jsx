@@ -1,8 +1,8 @@
 import AboutMeApp from './components/app-about-me';
 import ResumeApp from './components/app-resume';
 import WormApp from './components/app-worm';
-import WebBrowserApp from './components/app-web-browser';
 import MediaPlayerApp from './components/app-media-player';
+import ProjectApp from './components/app-project';
 
 export const AboutMe = {
 	name: 'About Me',
@@ -12,16 +12,6 @@ export const AboutMe = {
 	height: 450,
 	minWidth: 300,
 	minHeight: 200
-};
-
-export const WebBrowser = {
-	name: 'Internet',
-	content: WebBrowserApp,
-	iconSrc: '/img/app-icons/browser.png',
-	width: 800,
-	height: 600,
-	minWidth: 350,
-	minHeight: 230
 };
 
 export const Worm = {
@@ -53,38 +43,105 @@ export const MediaPlayer = {
 
 export const Simpai = {
 	name: 'SimPAI',
-	url: 'https://bass-dandy.github.io/simpai',
 	iconSrc: '/img/app-icons/simpai.png',
+	content: (windowProps) => (
+		<ProjectApp
+			description={(
+				<>
+					SimPAI is a tool for inspecting text-based resources within a Sims 2 .package file, useful for
+					authoring simple mods (eg: custom careers). The web app is written in Svelte and is distributed
+					via pnpm monorepo alongside a parsing library I also authored. This project is heavily based
+					on SimPE, the de-facto Sims 2 modding tool.
+				</>
+			)}
+			url="https://bass-dandy.github.io/simpai"
+			{...windowProps}
+		/>
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const Planechase = {
 	name: 'Planechase',
-	url: 'https://bass-dandy.github.io/planechase',
 	iconSrc: '/img/app-icons/planechase.png',
+	content: (windowProps) => (
+		<ProjectApp
+			description="A web app for creating planar decks for the Planechase variant of Magic: The Gathering. Once created, you can use your deck to play both vanilla Planechase and eternities map. The app is pretty old - I think it was written in React 15 with MaterialUI. Needless to say I've learned a lot since then, but I am still proud of the linear-algebra-in-CSS solution to zooming in on the map."
+			url="https://bass-dandy.github.io/planechase"
+			{...windowProps}
+		/>
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const PizzaDashPizzaDotPizza = {
 	name: 'Pizza Dash Pizza Dot Pizza',
-	url: 'https://pizza-pizza.pizza',
 	iconSrc: '/img/start.png',
+	content: (windowProps) => (
+		<ProjectApp url="https://pizza-pizza.pizza" {...windowProps} />
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const ACNHChecklists = {
 	name: 'Animal Crossing Checklists',
-	url: 'https://bass-dandy.github.io/acnh-checklists',
 	iconSrc: '/img/app-icons/acnh.png',
+	content: (windowProps) => (
+		<ProjectApp
+			description="A checklist for tracking collectibles in Animal Crossing: New Horizons. Technically very jank - for some reason I wanted to homebrew a React static page emitter. It was largely a CSS project anyway, and all animations you see are pure CSS. Check out the light / dark mode transition in the upper left!"
+			url="https://bass-dandy.github.io/acnh-checklists"
+			{...windowProps}
+		/>
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const UnifiedSandwichFramework = {
 	name: 'Unified Sandwich Framework',
-	url: 'https://sandwich.one',
 	iconSrc: '/img/app-icons/sandwich.png',
+	content: (windowProps) => (
+		<ProjectApp
+			description="A simple site explaining my unified sandwich theory. Literally just HTML/CSS/JS like the good old days!"
+			url="https://sandwich.one"
+			{...windowProps}
+		/>
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const Homeward = {
 	name: 'Homeward',
-	url: 'https://bass-dandy.github.io/homeward',
 	iconSrc: '/img/app-icons/homeward.webp',
+	content: (windowProps) => (
+		<ProjectApp
+			description={(
+				<>
+					A Svelte app for visualizing Dark Souls 3 fog gate randomizer spoiler logs as a network graph.
+				</>
+			)}
+			url="https://bass-dandy.github.io/homeward"
+			{...windowProps}
+		/>
+	),
+	width: 800,
+	height: 600,
+	minWidth: 350,
+	minHeight: 230
 };
 
 export const Projects = {
@@ -110,5 +167,4 @@ export default [
 	Resume,
 	Projects,
 	MediaPlayer,
-	WebBrowser
 ];

@@ -1,15 +1,12 @@
-.webBrowser {
-	flex: 1;
+.project {
 	display: flex;
 	flex-direction: column;
-}
-
-.urlBarWrapper {
-	display: flex;
-}
-
-.urlBar {
 	flex: 1;
+}
+
+.description {
+	padding: 8px;
+	font-size: 0.75rem;
 }
 
 .content {
@@ -19,15 +16,15 @@
 	margin-top: 2px;
 }
 
+.frame {
+	composes: inset from '@/app/page.module.css';
+	flex: 1;
+}
+
 .contentMask {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-}
-
-.frame {
-	composes: inset from '@/app/page.module.css';
-	flex: 1;
 }
