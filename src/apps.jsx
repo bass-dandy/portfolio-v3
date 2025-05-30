@@ -81,6 +81,12 @@ export const UnifiedSandwichFramework = {
 	iconSrc: '/img/app-icons/sandwich.png',
 };
 
+export const Homeward = {
+	name: 'Homeward',
+	url: 'https://bass-dandy.github.io/homeward',
+	iconSrc: '/img/app-icons/homeward.webp',
+};
+
 export const Projects = {
 	name: 'My Projects',
 	iconSrc: '/img/app-icons/folder.png',
@@ -91,6 +97,7 @@ export const Projects = {
 	children: [
 		Worm,
 		Simpai,
+		Homeward,
 		Planechase,
 		ACNHChecklists,
 		UnifiedSandwichFramework,
