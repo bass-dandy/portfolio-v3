@@ -1,9 +1,9 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 
+import apps from '@/apps';
 import useClickOutside from '@/hooks/useClickOutside';
 
-import Apps from '../../../apps';
 import StartMenuAppList from './start-menu-app-list';
 import styles from './start-menu.module.css';
 
@@ -22,7 +22,7 @@ export default function StartMenu(props) {
 				</div>
 			</div>
 			<StartMenuAppList
-				apps={Apps}
+				apps={apps}
 				launchApp={props.launchApp}
 			/>
 		</div>

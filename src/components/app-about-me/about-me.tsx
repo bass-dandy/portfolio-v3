@@ -21,9 +21,9 @@ const TABS = [
 		label: 'Contact',
 		TabComponent: Contact
 	}
-];
+] as const;
 
-export default function AboutMe() {
+const AboutMe: React.FC = () => {
 	const [activeTab, setActiveTab] = useState(0);
 	const {TabComponent} = TABS[activeTab];
 
@@ -50,4 +50,6 @@ export default function AboutMe() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default AboutMe;

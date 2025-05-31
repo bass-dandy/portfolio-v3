@@ -8,7 +8,7 @@ import styles from './resume.module.css';
 const resumePdf = '/img/resume/resume.pdf';
 
 export default function Resume() {
-	const iframe = useRef(null);
+	const iframe = useRef<HTMLIFrameElement>(null);
 
 	return (
 		<div className={styles.resume}>
@@ -21,7 +21,7 @@ export default function Resume() {
 						},
 						{
 							label: 'Print',
-							onClick: () => iframe.current.contentWindow.print()
+							onClick: () => iframe.current?.contentWindow?.print()
 						}
 					],
 					View: [

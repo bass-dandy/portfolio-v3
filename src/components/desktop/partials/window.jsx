@@ -152,16 +152,15 @@ export default class Window extends React.Component {
 					/>
 				</div>
 				<div className={styles.content}>
-					{ app.content ? (
+					{Array.isArray(app.content) ? (
+						<Directory contents={app.content} />
+					) : (
 						<app.content
 							isFocused={app.isFocused}
 							isDragging={this.state.isDragging}
 							isResizing={this.state.isResizing}
 						/>
-					) : null }
-					{ app.children ? (
-						<Directory contents={app.children} />
-					) : null }
+					)}
 				</div>
 				{ !app.resizeDisabled && !app.isMaximized ? (
 					<div className={styles.footer}>

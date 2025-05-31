@@ -1,6 +1,16 @@
 const cover = '/music/cover.jpg';
 
-export default [
+export type Song = {
+	title: string;
+	artist: string;
+	album: string;
+	length: string;
+	track: string;
+	src: string;
+	cover: string;
+};
+
+export const songs: Song[] = [
 	{
 		title: 'Sunrise Bleeds Across Ocean Waves',
 		artist: 'Bass Dandy',
@@ -37,4 +47,5 @@ export default [
 		src: '/music/04 - Hear Me Roar.mp3',
 		cover
 	}
-];
+] as const;
+

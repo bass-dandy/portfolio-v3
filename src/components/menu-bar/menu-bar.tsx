@@ -1,14 +1,21 @@
 import React, {useRef, useState} from 'react';
-import PropTypes from 'prop-types';
 
 import useClickOutside from '@/hooks/useClickOutside';
 
 import DropdownMenu from './partials/dropdown-menu';
 import styles from './menu-bar.module.css';
 
-export default function MenuBar(props) {
+const MenuBar: React.FC<{
+	options: {
+		[label: string]: {
+			label: string;
+			onClick: () => void;
+			isDisabled?: boolean;
+		}[];
+	};
+}> = ({options}) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [openItem, setOpenItem] = useState(null);
+	const [openItem, setOpenItem] = useState('');
 
 	const menuBar = useRef(null);
 	useClickOutside(menuBar, () => setIsOpen(false));
@@ -18,11 +25,11 @@ export default function MenuBar(props) {
 			className={styles.menuBar}
 			ref={menuBar}
 		>
-			{ Object.keys(props.options).map((label) => (
+			{Object.entries(options).map(([label, items]) => (
 				<DropdownMenu
 					key={label}
 					label={label}
-					options={props.options[label]}
+					items={items}
 					isOpen={isOpen && label === openItem}
 					onOpen={() => setIsOpen(true)}
 					onClose={() => setIsOpen(false)}
@@ -33,14 +40,4 @@ export default function MenuBar(props) {
 	);
 }
 
-MenuBar.propTypes = {
-	options: PropTypes.objectOf(
-		PropTypes.arrayOf(
-			PropTypes.shape({
-				label: PropTypes.string.isRequired,
-				onClick: PropTypes.func.isRequired,
-				disabled: PropTypes.bool
-			})
-		)
-	).isRequired
-};
+export default MenuBar;

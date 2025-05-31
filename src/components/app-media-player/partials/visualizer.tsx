@@ -1,18 +1,17 @@
-import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
+import React, {useLayoutEffect} from 'react';
 import styles from './visualizer.module.css';
 
 import Visualization from './visualization';
 
-export default function Visualizer(props) {
-	const canvas = React.useRef(null);
+const Visualizer: React.FC<{ audio: HTMLAudioElement | null }> = ({audio}) => {
+	const canvas = React.useRef<HTMLCanvasElement>(null);
 
-	useEffect(() => {
-		if (props.audio) {
+	useLayoutEffect(() => {
+		if (audio) {
 			// connect audio source to analyzer
 			const ctx = new AudioContext();
 			const analyser = ctx.createAnalyser();
-			const src = ctx.createMediaElementSource(props.audio);
+			const src = ctx.createMediaElementSource(audio);
 			src.connect(analyser);
 			analyser.connect(ctx.destination);
 
@@ -35,18 +34,16 @@ export default function Visualizer(props) {
 				cancelAnimationFrame(frame);
 			};
 		}
-	}, [props.audio]);
+	}, [audio]);
 
 	return (
 		<canvas
 			ref={canvas}
 			className={styles.canvas}
-			width={canvas.current && canvas.current.clientWidth}
-			height={canvas.current && canvas.current.clientHeight}
+			width={canvas.current?.clientWidth}
+			height={canvas.current?.clientHeight}
 		/>
 	);
 }
 
-Visualizer.propTypes = {
-	audio: PropTypes.object
-};
+export default Visualizer;

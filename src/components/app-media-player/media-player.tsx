@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import songs from './songs';
+import {songs, type Song} from './songs';
 import Visualizer from './partials/visualizer';
 import NowPlaying from './partials/now-playing';
 import Playlist from './partials/playlist';
@@ -9,16 +9,18 @@ import Scrubber from './partials/scrubber';
 import styles from './media-player.module.css';
 
 export default function MediaPlayer() {
-	const [audio, setAudio] = useState(null);
-	const [nowPlaying, setNowPlaying] = useState(null);
+	const [nowPlaying, setNowPlaying] = useState<Song | null>(null);
 	const [paused, setPaused] = useState(true);
 	const [currentTime, setCurrentTime] = useState(0);
-	const [seeking, setSeeking] = useState(false);
 
-	const selectSong = (song) => {
-		song !== nowPlaying
+	// usually we would use a ref for this, but since we repeatedly load different media sources into the
+	// same <audio> element we want to make sure the UI is reactive to those changes
+	const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+
+	const selectSong = (song: Song) => {
+		return song !== nowPlaying
 			? setNowPlaying(song)
-			: audio.play();
+			: audio?.play();
 	};
 
 	const playPrev = () => {
@@ -26,7 +28,7 @@ export default function MediaPlayer() {
 		if (nowPlayingIndex > 0) {
 			setNowPlaying(songs[nowPlayingIndex - 1]);
 		} else {
-			audio.load();
+			audio?.load();
 		}
 	};
 
@@ -36,53 +38,48 @@ export default function MediaPlayer() {
 			setNowPlaying(songs[nowPlayingIndex + 1]);
 		} else {
 			setNowPlaying(null);
-			audio.load();
+			audio?.load();
 		}
 	};
 
 	return (
 		<div className={styles.mediaPlayer}>
 			<div className={styles.header}>
-				<Visualizer
-					audio={audio}
-				/>
+				<Visualizer audio={audio} />
 				<NowPlaying
 					song={nowPlaying}
-					onPlay={() => audio.play()}
-					onPause={() => audio.pause()}
+					onPlay={() => audio?.play()}
+					onPause={() => audio?.pause()}
 					onPlayPrev={playPrev}
 					onPlayNext={playNext}
-					paused={paused}
+					isPaused={paused}
 				/>
 			</div>
 			<Scrubber
-				disabled={!nowPlaying}
-				currentTime={currentTime}
-				duration={audio && audio.duration}
-				onSeek={(time) => {
-					audio.currentTime = time;
-					setSeeking(true);
+				isDisabled={!nowPlaying}
+				currentTime={currentTime || 0 /* || 0 as this could be NaN */}
+				duration={audio?.duration || 0 /* || 0 as this could be NaN */}
+				onSeekEnd={(time: number) => {
+					if (audio) {
+						audio.currentTime = time;
+						setCurrentTime(time);
+					}
 				}}
-				seeking={seeking}
 			/>
 			<Playlist
 				songs={songs}
 				nowPlaying={nowPlaying}
 				onSelectSong={selectSong}
-				onPause={() => audio.pause()}
-				paused={paused}
+				onPause={() => audio?.pause()}
+				isPaused={paused}
 			/>
 			<audio
-				src={nowPlaying && nowPlaying.src}
-				ref={
-					// use callback + state rather than useRef so we can rerender when the ref attaches
-					(e) => setAudio(e)
-				}
+				src={nowPlaying?.src}
+				ref={(e) => setAudio(e)}
 				onPlay={() => setPaused(false)}
 				onPause={() => setPaused(true)}
-				onLoadedData={() => audio.play()}
-				onTimeUpdate={() => setCurrentTime(audio.currentTime)}
-				onSeeked={() => setSeeking(false)}
+				onLoadedData={() => audio?.play()}
+				onTimeUpdate={() => setCurrentTime(audio?.currentTime ?? 0)}
 				onEnded={playNext}
 			/>
 		</div>

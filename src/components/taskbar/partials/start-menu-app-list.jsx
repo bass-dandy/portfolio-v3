@@ -4,7 +4,6 @@ import classnames from 'classnames';
 
 import ArrowKeyFocus from '../../arrow-key-focus';
 import Clickable from '../../clickable';
-
 import styles from './start-menu-app-list.module.css';
 
 export default function StartMenuAppList(props) {
@@ -15,7 +14,7 @@ export default function StartMenuAppList(props) {
 			})}
 		>
 			<ArrowKeyFocus focusOnMount>
-				{ props.apps.map((app) => (
+				{props.apps.map((app) => (
 					<Clickable
 						element="li"
 						className={styles.appListItem}
@@ -32,18 +31,18 @@ export default function StartMenuAppList(props) {
 						<div className={styles.appName}>
 							{app.name}
 						</div>
-						{ app.children ? (
+						{Array.isArray(app.content) ? (
 							<>
 								{'\u25b6'}
 								<StartMenuAppList
-									apps={app.children}
+									apps={app.content}
 									launchApp={props.launchApp}
 									floating
 								/>
 							</>
-						) : null }
+						) : null}
 					</Clickable>
-				)) }
+				))}
 			</ArrowKeyFocus>
 		</ul>
 	);
