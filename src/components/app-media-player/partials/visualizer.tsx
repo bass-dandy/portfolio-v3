@@ -7,32 +7,18 @@ const Visualizer: React.FC<{ audio: HTMLAudioElement | null }> = ({audio}) => {
 	const canvas = React.useRef<HTMLCanvasElement>(null);
 
 	useLayoutEffect(() => {
-		if (audio) {
-			// connect audio source to analyzer
-			const ctx = new AudioContext();
-			const analyser = ctx.createAnalyser();
-			const src = ctx.createMediaElementSource(audio);
-			src.connect(analyser);
-			analyser.connect(ctx.destination);
+		if (audio && canvas.current) {
+			const vis = new Visualization(canvas.current, audio);
 
-			const frequencyData = new Uint8Array(analyser.frequencyBinCount);
-			const vis = new Visualization();
-
-			// grab audio analysis every frame and draw the visualization
-			let frame = requestAnimationFrame(
-				function getFrequencies() {
-					frame = requestAnimationFrame(getFrequencies);
-					if (canvas.current) {
-						analyser.getByteFrequencyData(frequencyData);
-						vis.draw(canvas.current, frequencyData);
-					}
+			const draw = () => {
+				if (canvas.current) {
+					vis.draw();
 				}
-			);
-
-			// clean up analysis collection
-			return () => {
-				cancelAnimationFrame(frame);
+				frame = requestAnimationFrame(draw);
 			};
+			let frame = requestAnimationFrame(draw);
+
+			return () => cancelAnimationFrame(frame);
 		}
 	}, [audio]);
 
