@@ -1,3 +1,31 @@
 .button {
+	font-family: pixel-arial;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+	cursor: pointer;
+}
+
+.outset {
 	composes: outset-active-inset from '@/app/page.module.css';
+}
+
+.menu {
+	display: block;
+	padding: 3px 7px;
+	border: 0;
+	background: transparent;
+	font-family: pixel-arial;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.menu:not(:disabled):hover {
+	background: var(--bluePrimary);
+	color: var(--white);
+}
+
+.menu:disabled {
+	color: var(--grayInset);
+	cursor: default;
 }

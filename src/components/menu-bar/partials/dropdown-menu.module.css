@@ -1,6 +1,8 @@
 .menuBarItem {
 	position: relative;
-	padding: 3px 7px;
+}
+
+.menuBarItem > button {
 	font-size: 0.6rem;
 }
 
@@ -17,24 +19,22 @@
 	padding: 0;
 	background-color: var(--grayPrimary);
 	list-style: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.dropdownMenu > li {
+	padding: 0;
+	margin: 0;
 }
 
 .dropdownMenuItem {
-	padding: 5px 5px 5px 10px;
+	width: 100%;
+	padding: 5px 10px;
 	font-size: 0.6rem;
-	text-align: left;
-	color: var(--black);
 }
 
-.dropdownMenuItem.disabled {
-	color: var(--grayInset);
-	cursor: default;
-}
-
-.menuBarItem:hover,
-.dropdownMenuItem:not(.disabled):hover,
-.menuBarItem.open {
+.menuBarItem.open > button {
 	background-color: var(--bluePrimary);
 	color: var(--white);
-	cursor: pointer;
 }

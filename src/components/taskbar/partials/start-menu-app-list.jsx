@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
+import {Button} from '@/components/button';
+
 import ArrowKeyFocus from '../../arrow-key-focus';
-import Clickable from '../../clickable';
 import styles from './start-menu-app-list.module.css';
 
 export default function StartMenuAppList(props) {
@@ -15,33 +16,32 @@ export default function StartMenuAppList(props) {
 		>
 			<ArrowKeyFocus focusOnMount>
 				{props.apps.map((app) => (
-					<Clickable
-						element="li"
-						className={styles.appListItem}
-						onClick={(e) => {
-							e.stopPropagation();
-							props.launchApp(app);
-						}}
-						key={app.name}
-					>
-						<img
-							src={app.iconSrc}
-							alt=""
-						/>
-						<div className={styles.appName}>
-							{app.name}
-						</div>
+					<li key={app.name}>
+						<Button
+							variant="menu"
+							className={styles.appListItem}
+							onClick={(e) => {
+								e.stopPropagation();
+								props.launchApp(app);
+							}}
+						>
+							<img
+								src={app.iconSrc}
+								alt=""
+							/>
+							<div className={styles.appName}>
+								{app.name}
+							</div>
+							{Array.isArray(app.content) && '\u25b6'}
+						</Button>
 						{Array.isArray(app.content) ? (
-							<>
-								{'\u25b6'}
-								<StartMenuAppList
-									apps={app.content}
-									launchApp={props.launchApp}
-									floating
-								/>
-							</>
+							<StartMenuAppList
+								apps={app.content}
+								launchApp={props.launchApp}
+								floating
+							/>
 						) : null}
-					</Clickable>
+					</li>
 				))}
 			</ArrowKeyFocus>
 		</ul>

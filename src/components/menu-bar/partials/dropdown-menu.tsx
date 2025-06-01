@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import Clickable from '../../clickable';
+
+import {Button} from '@/components/button';
 
 import styles from './dropdown-menu.module.css';
 
@@ -16,41 +17,38 @@ const DropdownMenu: React.FC<{
 	onHover: () => void;
 	isOpen: boolean;
 }> = (props) =>  (
-	<Clickable
-		element="li"
+	<li
 		className={classnames(styles.menuBarItem, {
 			[styles.open]: props.isOpen
 		})}
-		onClick={props.isOpen ? props.onClose : props.onOpen}
-		onMouseOver={props.onHover}
-		onFocus={props.onHover}
 	>
-		{props.label}
-		<ul
-			className={styles.dropdownMenu}
-			onClick={(e) => {
-				// slight hack to stop clicks on disabled items from closing the menu
-				e.stopPropagation();
-			}}
+		<Button
+			variant="menu"
+			onClick={props.isOpen ? props.onClose : props.onOpen}
+			onMouseOver={props.onHover}
+			onFocus={props.onHover}
 		>
+			{props.label}
+		</Button>
+		<ul className={styles.dropdownMenu}>
 			{props.items.map((item) => (
-				<Clickable
-					element="li"
-					className={classnames(styles.dropdownMenuItem, {
-						[styles.disabled]: item.isDisabled
-					})}
-					onClick={() => {
-						item.onClick();
-						props.onClose();
-					}}
-					disabled={item.isDisabled}
-					key={item.label}
-				>
-					{item.label}
-				</Clickable>
+				<li key={item.label} className={styles.dropdownMenuItem}>
+					<Button
+						variant="menu"
+						onClick={(e) => {
+							item.onClick();
+							props.onClose();
+							e.stopPropagation(); // stop clicks on disabled items from closing the menu
+						}}
+						disabled={item.isDisabled}
+						className={styles.dropdownMenuItem}
+					>
+						{item.label}
+					</Button>
+				</li>
 			))}
 		</ul>
-	</Clickable>
+	</li>
 );
 
 export default DropdownMenu;

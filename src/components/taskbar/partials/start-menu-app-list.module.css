@@ -1,5 +1,7 @@
 .appList {
 	flex: 1;
+	display: flex;
+	flex-direction: column;
 	padding: 3px;
 	margin: 0;
 	background-color: var(--grayPrimary);
@@ -15,13 +17,21 @@
 	left: 100%;
 }
 
-.appListItem {
+.appList > li {
 	position: relative;
+}
+
+.appList > li:hover > .appList.floating {
+	display: block;
+}
+
+.appListItem {
 	display: flex;
 	align-items: center;
+	gap: 10px;
 	padding: 3px;
-	white-space: nowrap;
-	cursor: pointer;
+	width: 100%;
+	font-size: 0.6rem;
 }
 
 .appListItem img {
@@ -31,14 +41,4 @@
 
 .appName {
 	flex: 1;
-	margin-left: 10px;
-}
-
-.appListItem:hover {
-	background-color: var(--bluePrimary);
-	color: var(--white);
-}
-
-.appListItem:hover > .appList.floating {
-	display: block;
 }
