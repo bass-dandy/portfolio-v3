@@ -17,14 +17,11 @@ const MenuBar: React.FC<{
 	const [isOpen, setIsOpen] = useState(false);
 	const [openItem, setOpenItem] = useState('');
 
-	const menuBar = useRef(null);
+	const menuBar = useRef<HTMLUListElement>(null);
 	useClickOutside(menuBar, () => setIsOpen(false));
 
 	return (
-		<ul
-			className={styles.menuBar}
-			ref={menuBar}
-		>
+		<ul className={styles.menuBar} ref={menuBar}>
 			{Object.entries(options).map(([label, items]) => (
 				<DropdownMenu
 					key={label}
