@@ -1,22 +1,19 @@
 'use client'
 
-import {useEffect} from 'react';
-import {Provider} from 'react-redux';
+import {useEffect, useState} from 'react';
 
-import Desktop from '../components/desktop';
-import Taskbar from '../components/taskbar';
-import createStore from '../redux/store';
+import type {RunningApp} from '@/apps';
+import Desktop from '@/components/desktop';
+import Taskbar from '@/components/taskbar';
+import {RunningAppContext} from '@/context';
+
 import styles from "./page.module.css";
 
 const TAB = 9;
 
-const store = createStore({
-	windows: {
-		runningApps: []
-	}
-});
-
 const Home: React.FC = () => {
+	const [runningApps, setRunningApps] = useState<RunningApp[]>([]);
+
 	useEffect(() => {
 		const keydownListener = (e: KeyboardEvent) => {
 			if (e.keyCode === TAB) {
@@ -37,12 +34,10 @@ const Home: React.FC = () => {
 	}, []);
 
 	return (
-		<Provider store={store}>
-		<>
+		<RunningAppContext.Provider value={{runningApps, setRunningApps}}>
 			<Desktop/>
 			<Taskbar/>
-		</>
-		</Provider>
+		</RunningAppContext.Provider>
 	);
 };
 

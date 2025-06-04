@@ -36,6 +36,7 @@
 
 .appListItem img {
 	height: 30px;
+	width: auto;
 	pointer-events: none;
 }
 

@@ -51,6 +51,7 @@
 
 .taskbarApp img {
 	height: 1rem;
+	width: auto;
 	vertical-align: middle;
 	margin-right: 5px;
 }

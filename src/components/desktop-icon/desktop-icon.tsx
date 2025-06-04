@@ -1,20 +1,20 @@
 import Image from 'next/image';
 import React, {useRef, useEffect} from 'react';
 import classnames from 'classnames';
-import {useDispatch} from 'react-redux';
 
-import {launchApp} from '@/redux/windows';
+import {useRunningAppContext} from '@/context';
 
 import type {App} from '@/apps';
 import styles from './desktop-icon.module.css';
 
 const DesktopIcon: React.FC<{
 	app: App;
-	darkText: boolean;
+	darkText?: boolean;
 	className?: string;
 }> = ({app, className, darkText}) => {
-	const dispatch = useDispatch();
 	const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+	const {launchApp} = useRunningAppContext();
 
 	useEffect(() => {
 		const focusWhenKilled = (e: CustomEvent) => {
@@ -33,7 +33,7 @@ const DesktopIcon: React.FC<{
 			className={classnames(styles.desktopIcon, className, {
 				[styles.darkText]: darkText
 			})}
-			onClick={() => dispatch(launchApp(app))}
+			onClick={() => launchApp(app.name)}
 		>
 			<Image
 				src={app.iconSrc}

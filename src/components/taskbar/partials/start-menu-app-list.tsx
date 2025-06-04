@@ -1,33 +1,42 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import Image from 'next/image';
 
+import type {App, AppName} from '@/apps';
 import {Button} from '@/components/button';
 
 import ArrowKeyFocus from '../../arrow-key-focus';
 import styles from './start-menu-app-list.module.css';
 
-export default function StartMenuAppList(props) {
+interface StartMenuAppListProps {
+	apps: App[];
+	launchApp: (name: AppName) => void;
+	isFloating?: boolean;
+}
+
+export default function StartMenuAppList({apps, launchApp, isFloating}: StartMenuAppListProps) {
 	return (
 		<ul
 			className={classnames(styles.appList, {
-				[styles.floating]: props.floating
+				[styles.floating]: isFloating
 			})}
 		>
 			<ArrowKeyFocus focusOnMount>
-				{props.apps.map((app) => (
+				{apps.map((app) => (
 					<li key={app.name}>
 						<Button
 							variant="menu"
 							className={styles.appListItem}
 							onClick={(e) => {
 								e.stopPropagation();
-								props.launchApp(app);
+								launchApp(app.name);
 							}}
 						>
-							<img
+							<Image
 								src={app.iconSrc}
 								alt=""
+								width={50}
+								height={50}
 							/>
 							<div className={styles.appName}>
 								{app.name}
@@ -35,11 +44,7 @@ export default function StartMenuAppList(props) {
 							{Array.isArray(app.content) && '\u25b6'}
 						</Button>
 						{Array.isArray(app.content) ? (
-							<StartMenuAppList
-								apps={app.content}
-								launchApp={props.launchApp}
-								floating
-							/>
+							<StartMenuAppList apps={app.content} launchApp={launchApp} isFloating />
 						) : null}
 					</li>
 				))}
@@ -47,15 +52,3 @@ export default function StartMenuAppList(props) {
 		</ul>
 	);
 }
-
-StartMenuAppList.propTypes = {
-	apps: PropTypes.arrayOf(
-		PropTypes.shape({
-			name: PropTypes.string.isRequired,
-			iconSrc: PropTypes.string.isRequired,
-			children: PropTypes.arrayOf(PropTypes.object)
-		})
-	).isRequired,
-	launchApp: PropTypes.func.isRequired,
-	floating: PropTypes.bool
-};

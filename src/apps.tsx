@@ -6,14 +6,14 @@ import ProjectApp from './components/app-project';
 
 export type AppProps = {
 	isFocused: boolean;
-	isResizing: boolean;
-	isDragging: boolean;
+	isMinimized: boolean;
+	isMoving: boolean;
 };
 
 type BaseApp = {
 	name: string;
 	iconSrc: string;
-	content: React.FC<AppProps> | App[];
+	content: React.FC<AppProps> | AnonymousApp[];
 };
 
 type ResizableApp = BaseApp & {
@@ -23,9 +23,9 @@ type ResizableApp = BaseApp & {
 	minHeight: number;
 };
 
-export type App = BaseApp | (BaseApp & ResizableApp);
+type AnonymousApp = BaseApp | (BaseApp & ResizableApp);
 
-export const AboutMe = {
+const AboutMe = {
 	name: 'About Me',
 	iconSrc: '/img/app-icons/about-me.png',
 	content: AboutMeApp,
@@ -33,15 +33,15 @@ export const AboutMe = {
 	height: 450,
 	minWidth: 300,
 	minHeight: 200
-};
+} as const satisfies AnonymousApp;
 
-export const Worm = {
+const Worm = {
 	name: 'Worm',
 	iconSrc: '/img/app-icons/worm.png',
 	content: WormApp,
-};
+} as const satisfies AnonymousApp;
 
-export const Resume = {
+const Resume = {
 	name: 'Resume',
 	iconSrc: '/img/app-icons/resume.png',
 	content: ResumeApp,
@@ -49,9 +49,9 @@ export const Resume = {
 	height: 800,
 	minWidth: 250,
 	minHeight: 200
-};
+} as const satisfies AnonymousApp;
 
-export const MediaPlayer = {
+const MediaPlayer = {
 	name: 'My Music',
 	iconSrc: '/img/app-icons/media-player.png',
 	content: MediaPlayerApp,
@@ -59,9 +59,9 @@ export const MediaPlayer = {
 	height: 400,
 	minWidth: 500,
 	minHeight: 300
-};
+} as const satisfies AnonymousApp;
 
-export const Simpai = {
+const Simpai = {
 	name: 'SimPAI',
 	iconSrc: '/img/app-icons/simpai.png',
 	content: (props: AppProps) => (
@@ -82,9 +82,9 @@ export const Simpai = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const Planechase = {
+const Planechase = {
 	name: 'Planechase',
 	iconSrc: '/img/app-icons/planechase.png',
 	content: (props: AppProps) => (
@@ -98,9 +98,9 @@ export const Planechase = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const PizzaDashPizzaDotPizza = {
+const PizzaDashPizzaDotPizza = {
 	name: 'Pizza Dash Pizza Dot Pizza',
 	iconSrc: '/img/start.png',
 	content: (props: AppProps) => (
@@ -110,9 +110,9 @@ export const PizzaDashPizzaDotPizza = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const ACNHChecklists = {
+const ACNHChecklists = {
 	name: 'Animal Crossing Checklists',
 	iconSrc: '/img/app-icons/acnh.png',
 	content: (props: AppProps) => (
@@ -126,9 +126,9 @@ export const ACNHChecklists = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const UnifiedSandwichFramework = {
+const UnifiedSandwichFramework = {
 	name: 'Unified Sandwich Framework',
 	iconSrc: '/img/app-icons/sandwich.png',
 	content: (props: AppProps) => (
@@ -142,18 +142,14 @@ export const UnifiedSandwichFramework = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const Homeward = {
+const Homeward = {
 	name: 'Homeward',
 	iconSrc: '/img/app-icons/homeward.webp',
 	content: (props: AppProps) => (
 		<ProjectApp
-			description={(
-				<>
-					A Svelte app for visualizing Dark Souls 3 fog gate randomizer spoiler logs as a network graph.
-				</>
-			)}
+			description="A Svelte app for visualizing Dark Souls 3 fog gate randomizer spoiler logs as a network graph."
 			url="https://bass-dandy.github.io/homeward"
 			{...props}
 		/>
@@ -162,9 +158,9 @@ export const Homeward = {
 	height: 600,
 	minWidth: 350,
 	minHeight: 230
-};
+} as const satisfies AnonymousApp;
 
-export const Projects = {
+const Projects = {
 	name: 'My Projects',
 	iconSrc: '/img/app-icons/folder.png',
 	width: 500,
@@ -180,13 +176,40 @@ export const Projects = {
 		UnifiedSandwichFramework,
 		PizzaDashPizzaDotPizza
 	]
-};
+} as const satisfies AnonymousApp;
 
-const apps: App[] = [
+export const appsByName = {
+	[AboutMe.name]: AboutMe,
+	[Worm.name]: Worm,
+	[Resume.name]: Resume,
+	[MediaPlayer.name]: MediaPlayer,
+	[Simpai.name]: Simpai,
+	[Homeward.name]: Homeward,
+	[Planechase.name]: Planechase,
+	[ACNHChecklists.name]: ACNHChecklists,
+	[UnifiedSandwichFramework.name]: UnifiedSandwichFramework,
+	[PizzaDashPizzaDotPizza.name]: PizzaDashPizzaDotPizza,
+	[Projects.name]: Projects,
+} as const satisfies Record<string, AnonymousApp>;
+
+export const desktopApps = [
 	AboutMe,
 	Resume,
 	Projects,
 	MediaPlayer,
 ];
 
-export default apps;
+export type AppName = keyof typeof appsByName;
+
+export type App = typeof appsByName[AppName];
+
+export type RunningApp = {
+	name: AppName;
+	isFocused: boolean;
+	isMinimized: boolean;
+	isMoving: boolean;
+};
+
+export function appIsResizable(app: AnonymousApp): app is ResizableApp {
+	return (app as ResizableApp).width !== undefined;
+}

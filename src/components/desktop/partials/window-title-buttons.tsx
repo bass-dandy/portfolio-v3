@@ -1,17 +1,34 @@
 import Image from 'next/image';
 import React, {forwardRef, useRef, useImperativeHandle} from 'react';
-import PropTypes from 'prop-types';
 
 import {Button} from '@/components/button';
 
 import styles from './window-title-buttons.module.css';
 
-const TitleButtons = forwardRef((props, ref) => {
-	const closeButton = useRef(null);
+export interface TitleButtonsRef {
+	focus: () => void;
+}
+
+interface TitleButtonsProps {
+	onMinimize: () => void;
+	onMaximize: () => void;
+	onClose: () => void;
+	canMaximize: boolean;
+	isMaximized: boolean;
+}
+
+export default forwardRef<TitleButtonsRef, TitleButtonsProps>(function TitleButtons({
+	onMinimize,
+	onMaximize,
+	onClose,
+	canMaximize,
+	isMaximized,
+}, ref) {
+	const closeButton = useRef<HTMLButtonElement>(null);
 
 	useImperativeHandle(ref, () => ({
 		focus() {
-			closeButton.current.focus();
+			closeButton.current?.focus();
 		}
 	}));
 
@@ -19,19 +36,19 @@ const TitleButtons = forwardRef((props, ref) => {
 		<div className={styles.titleButtons}>
 			<Button
 				className={styles.minimize}
-				onClick={props.onMinimize}
+				onClick={onMinimize}
 				aria-label="minimize window"
 			>
 				<Image src="/img/window/minimize.png" alt="" width={50} height={50} />
 			</Button>
-			{ props.canMaximize ? (
+			{canMaximize ? (
 				<Button
 					className={styles.maximize}
-					onClick={props.onMaximize}
+					onClick={onMaximize}
 					aria-label="maximize window"
 				>
 					<Image
-						src={props.isMaximized ? '/img/window/restore_down.png' : '/img/window/maximize.png'}
+						src={isMaximized ? '/img/window/restore_down.png' : '/img/window/maximize.png'}
 						alt=""
 						width={50}
 						height={50}
@@ -40,7 +57,7 @@ const TitleButtons = forwardRef((props, ref) => {
 			) : null }
 			<Button
 				className={styles.close}
-				onClick={props.onClose}
+				onClick={onClose}
 				ref={closeButton}
 				aria-label="close window"
 			>
@@ -49,13 +66,3 @@ const TitleButtons = forwardRef((props, ref) => {
 		</div>
 	);
 });
-
-TitleButtons.propTypes = {
-	appName: PropTypes.string.isRequired,
-	onMinimize: PropTypes.func.isRequired,
-	onMaximize: PropTypes.func.isRequired,
-	onClose: PropTypes.func.isRequired,
-	canMaximize: PropTypes.bool
-};
-
-export default TitleButtons;
