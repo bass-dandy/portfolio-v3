@@ -3,7 +3,7 @@ import styles from './clock.module.css';
 
 function getCurrentTime() {
 	const date = new Date();
-	return date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+	return date.toLocaleTimeString([], {hour: 'numeric', minute: 'numeric'});
 }
 
 export default function Clock() {
@@ -19,9 +19,7 @@ export default function Clock() {
 
 	return (
 		<div className={styles.clock}>
-			<div className="center-vertical">
-				{time}
-			</div>
+			{time}
 		</div>
 	);
 }
