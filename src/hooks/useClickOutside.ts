@@ -3,13 +3,15 @@ import {useEffect} from 'react';
 const useClickOutside = (ref: React.RefObject<HTMLElement | null>, callback: (e: Event) => void) => {
 	useEffect(() => {
 		const onClickOutside = (e: MouseEvent) => {
+			console.log('outer');
 			if (ref.current !== e.target && !ref.current?.contains(e.target as HTMLElement)) {
 				callback(e);
+				console.log('inner');
 			}
 		};
-		document.addEventListener('click', onClickOutside);
+		window.addEventListener('click', onClickOutside);
 
-		return () => document.removeEventListener('click', onClickOutside);
+		return () => window.removeEventListener('click', onClickOutside);
 	}, [ref, callback]);
 }
 

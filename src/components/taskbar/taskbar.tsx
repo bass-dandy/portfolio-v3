@@ -6,7 +6,7 @@ import {appsByName} from '@/apps';
 import {useRunningAppContext} from '@/context';
 
 import Clock from './partials/clock';
-import StartButton from './partials/start-button';
+import StartMenu from './partials/start-menu';
 import styles from './taskbar.module.css';
 
 export default function Taskbar() {
@@ -22,7 +22,7 @@ export default function Taskbar() {
 
 	return (
 		<div className={styles.taskbar}>
-			<StartButton />
+			<StartMenu />
 			<div className={styles.taskbarApps}>
 				{runningApps.map((app) => (
 					<button
