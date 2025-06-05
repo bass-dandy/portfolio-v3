@@ -115,7 +115,12 @@ export default function Window({
 				[styles.minimized]: appWindow.isMinimized,
 				[styles.maximized]: isMaximized,
 			})}
-			style={{ top, left, width, height }}
+			style={{
+				top,
+				left,
+				width: isResizable ? width : 'auto',
+				height: isResizable ? height : 'auto',
+			}}
 			onMouseDown={() => focusApp(appWindow.name)}
 		>
 			<div className={styles.header} ref={headerRef}>

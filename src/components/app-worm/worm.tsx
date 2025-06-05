@@ -3,13 +3,15 @@ import WormGame from '@bass_dandy/w0rm';
 import Controls from './partials/controls';
 import styles from './worm.module.css';
 
-const Worm = ({isFocused}) => {
+export default function Worm({isFocused}: {isFocused: boolean}) {
 	const [score, setScore] = useState(0);
-	const [game, setGame] = useState(null);
+	const [game, setGame] = useState<WormGame | null>(null);
 
-	const canvasRef = useRef();
+	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useLayoutEffect(() => {
+		if (!canvasRef.current) return;
+
 		const wormGame = new WormGame(canvasRef.current, setScore)
 		wormGame.enableKeyboardControls();
 		setGame(wormGame);
@@ -47,5 +49,3 @@ const Worm = ({isFocused}) => {
 		</div>
 	);
 }
-
-export default Worm;
