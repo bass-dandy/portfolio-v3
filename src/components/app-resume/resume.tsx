@@ -5,7 +5,7 @@ import {download} from '@/util';
 import MenuBar from '../menu-bar';
 import styles from './resume.module.css';
 
-const resumePdf = '/img/resume/resume.pdf';
+const resumePdf = '/docs/resume.pdf';
 
 export default function Resume({ isMoving }: { isMoving: boolean }) {
 	const iframe = useRef<HTMLIFrameElement>(null);
