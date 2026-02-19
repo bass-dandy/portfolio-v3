@@ -40,7 +40,7 @@ export default function Desktop() {
 					containerWidth={containerWidth}
 					containerHeight={containerHeight}
 				/>
-			)) }
+			))}
 		</div>
 	);
 }

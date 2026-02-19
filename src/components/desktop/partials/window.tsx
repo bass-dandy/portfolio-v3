@@ -25,13 +25,14 @@ export default function Window({
 	containerHeight,
 }: WindowProps) {
 	const appConfig = appsByName[appWindow.name];
-
 	const isResizable = appIsResizable(appConfig);
 
 	const {
 		killApp,
 		focusApp,
 		minimizeApp,
+		beginAppMovement,
+		endAppMovement,
 	} = useRunningAppContext();
 
 	const [top, setTop] = useState(0);
@@ -73,6 +74,12 @@ export default function Window({
 		setIsMaximized(false);
 	}, [left, width, setIsMaximized, containerWidth]);
 
+	const handleDragStart = useCallback((e: MouseEvent) => {
+		beginAppMovement(appWindow.name);
+		setDragOffsetLeft(e.clientX - left);
+		setDragOffsetTop(e.clientY - top);
+	}, [appWindow, beginAppMovement, left, top]);
+
 	const handleWindowDrag = useCallback((e: MouseEvent) => {
 		if (isMaximized) {
 			unmaximizeWithDrag(e.clientX, e.clientY);
@@ -108,6 +115,14 @@ export default function Window({
 		);
 	}, [appConfig, left, top, containerWidth, containerHeight, isResizable]);
 
+	const handleResizeStart = useCallback(() => {
+		beginAppMovement(appWindow.name);
+	}, [appWindow, beginAppMovement]);
+
+	const handleMovementEnd = useCallback(() => {
+		endAppMovement(appWindow.name);
+	}, [appWindow, endAppMovement]);
+
 	return (
 		<div
 			className={classnames(styles.window, {
@@ -127,11 +142,9 @@ export default function Window({
 				<DragHandle
 					title={appWindow.name}
 					iconSrc={appConfig.iconSrc}
-					onDragStart={(e) => {
-						setDragOffsetLeft(e.clientX - left);
-						setDragOffsetTop(e.clientY - top);
-					}}
+					onDragStart={handleDragStart}
 					onDrag={handleWindowDrag}
+					onDragEnd={handleMovementEnd}
 				/>
 				<TitleButtons
 					ref={titleButtonsRef}
@@ -153,7 +166,11 @@ export default function Window({
 			</div>
 			{isResizable && !isMaximized ? (
 				<div className={styles.footer}>
-					<ResizeHandle onResize={handleWindowResize} />
+					<ResizeHandle
+						onResizeStart={handleResizeStart}
+						onResize={handleWindowResize}
+						onResizeEnd={handleMovementEnd}
+					/>
 				</div>
 			) : null}
 		</div>

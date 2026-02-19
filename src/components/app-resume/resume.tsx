@@ -7,7 +7,7 @@ import styles from './resume.module.css';
 
 const resumePdf = '/img/resume/resume.pdf';
 
-export default function Resume() {
+export default function Resume({ isMoving }: { isMoving: boolean }) {
 	const iframe = useRef<HTMLIFrameElement>(null);
 
 	return (
@@ -37,6 +37,7 @@ export default function Resume() {
 					src={resumePdf}
 					ref={iframe}
 				/>
+				{isMoving ? <div className={styles.mask} /> : null}
 			</div>
 		</div>
 	);

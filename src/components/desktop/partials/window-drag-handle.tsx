@@ -6,41 +6,45 @@ import styles from './window-drag-handle.module.css';
 interface WindowDragHandleProps {
 	title: string;
 	iconSrc: string;
-	onDrag: (e: MouseEvent) => void;
 	onDragStart: (e: MouseEvent) => void;
+	onDrag: (e: MouseEvent) => void;
+	onDragEnd: (e: MouseEvent) => void;
 }
 
 export default function WindowDragHandle({
 	title,
 	iconSrc,
-	onDrag,
 	onDragStart,
+	onDrag,
+	onDragEnd,
 }: WindowDragHandleProps) {
 	const [isDragging, setIsDragging] = useState(false);
 
 	useEffect(() => {
-		const handleMouseUp = () => {
-			setIsDragging(false);
+		const handleMouseUp = (e: MouseEvent) => {
+			if (isDragging) {
+				onDragEnd(e);
+				setIsDragging(false);
+			}
 		};
+		window.addEventListener('mouseup', handleMouseUp);
+		return () => window.removeEventListener('mouseup', handleMouseUp);
+	}, [onDragEnd, isDragging]);
+
+	useEffect(() => {
 		const handleWindowDrag = (e: MouseEvent) => {
 			if (isDragging) {
 				onDrag(e);
 			}
 		};
 		window.addEventListener('mousemove', handleWindowDrag);
-		window.addEventListener('mouseup', handleMouseUp);
-
-		return () => {
-			window.removeEventListener('mousemove', handleWindowDrag);
-			window.removeEventListener('mouseup', handleMouseUp);
-		};
+		return () => window.removeEventListener('mousemove', handleWindowDrag);
 	}, [isDragging, onDrag]);
 
 	return (
 		<div
 			className={styles.windowHeader}
 			onMouseDown={(e) => {
-				e.persist();
 				onDragStart(e.nativeEvent);
 				setIsDragging(true);
 			}}

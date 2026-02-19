@@ -23,7 +23,7 @@ type ResizableApp = BaseApp & {
 	minHeight: number;
 };
 
-type AnonymousApp = BaseApp | (BaseApp & ResizableApp);
+type AnonymousApp = BaseApp | ResizableApp;
 
 const AboutMe = {
 	name: 'About Me',
@@ -203,12 +203,7 @@ export type AppName = keyof typeof appsByName;
 
 export type App = typeof appsByName[AppName];
 
-export type RunningApp = {
-	name: AppName;
-	isFocused: boolean;
-	isMinimized: boolean;
-	isMoving: boolean;
-};
+export type RunningApp = { name: AppName } & AppProps;
 
 export function appIsResizable(app: AnonymousApp): app is ResizableApp {
 	return (app as ResizableApp).width !== undefined;

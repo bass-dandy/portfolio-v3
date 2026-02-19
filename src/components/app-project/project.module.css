@@ -5,6 +5,7 @@
 }
 
 .description {
+	composes: inset from '@/app/page.module.css';
 	padding: 8px;
 	font-size: 0.75rem;
 }
