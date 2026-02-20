@@ -9,6 +9,7 @@
 	padding: 2px;
 	border-width: 1px;
 	background-color: var(--grayPrimary);
+	line-height: 1;
 }
 
 .close {

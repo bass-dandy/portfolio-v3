@@ -33,6 +33,7 @@ export default function Window({
 		minimizeApp,
 		beginAppMovement,
 		endAppMovement,
+		hasAppMovement,
 	} = useRunningAppContext();
 
 	const [top, setTop] = useState(0);
@@ -155,7 +156,11 @@ export default function Window({
 					isMaximized={isMaximized}
 				/>
 			</div>
-			<div className={styles.content}>
+			<div
+				className={classnames(styles.content, {
+					[styles.disableSelect]: hasAppMovement(),
+				})}
+			>
 				<ErrorBoundary onCatch={() => killApp(appWindow.name)}>
 					{Array.isArray(appConfig.content) ? (
 						<Directory contents={appConfig.content} />

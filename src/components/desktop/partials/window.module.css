@@ -41,6 +41,7 @@
 	margin: 2px;
 	background-color: var(--grayInset);
 	color: var(--grayPrimary);
+	user-select: none;
 }
 
 .content {
@@ -49,6 +50,10 @@
 	flex: 1;
 	overflow: auto;
 	margin: 0 2px 2px 2px;
+}
+
+.disableSelect {
+	user-select: none;
 }
 
 .footer {

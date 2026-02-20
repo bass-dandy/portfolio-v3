@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 
+import {useRunningAppContext} from '@/context';
 import {download} from '@/util';
 
 import MenuBar from '../menu-bar';
@@ -7,7 +8,8 @@ import styles from './resume.module.css';
 
 const resumePdf = '/docs/resume.pdf';
 
-export default function Resume({ isMoving }: { isMoving: boolean }) {
+export default function Resume() {
+	const {hasAppMovement} = useRunningAppContext();
 	const iframe = useRef<HTMLIFrameElement>(null);
 
 	return (
@@ -37,7 +39,11 @@ export default function Resume({ isMoving }: { isMoving: boolean }) {
 					src={resumePdf}
 					ref={iframe}
 				/>
-				{isMoving ? <div className={styles.mask} /> : null}
+				{/*
+					this mask is a bit of a hack to prevent the iframe from interfering with window
+					drag + resize actions (it would otherwise swallow mouseup and mousemove events)
+				*/}
+				{hasAppMovement() ? <div className={styles.mask} /> : null}
 			</div>
 		</div>
 	);

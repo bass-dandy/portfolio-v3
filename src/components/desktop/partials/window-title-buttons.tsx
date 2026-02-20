@@ -45,7 +45,7 @@ export default forwardRef<TitleButtonsRef, TitleButtonsProps>(function TitleButt
 				<Button
 					className={styles.maximize}
 					onClick={onMaximize}
-					aria-label="maximize window"
+					aria-label={isMaximized ? "restore window" : "maximize window"}
 				>
 					<Image
 						src={isMaximized ? '/img/window/restore_down.png' : '/img/window/maximize.png'}

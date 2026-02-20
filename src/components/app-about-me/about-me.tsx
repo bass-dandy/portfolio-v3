@@ -3,7 +3,6 @@ import classnames from 'classnames';
 
 import ArrowKeyFocus from '../arrow-key-focus';
 import Me from './partials/me';
-import Site from './partials/site';
 import Contact from './partials/contact';
 
 import styles from './about-me.module.css';
@@ -12,10 +11,6 @@ const TABS = [
 	{
 		label: 'About Me',
 		TabComponent: Me
-	},
-	{
-		label: 'About This Site',
-		TabComponent: Site
 	},
 	{
 		label: 'Contact',

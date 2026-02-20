@@ -86,6 +86,10 @@ export const useRunningAppContext = () => {
 		updateApp(name, {isMoving: false});
 	}, [updateApp]);
 
+	const hasAppMovement = useCallback(() => {
+		return runningApps.some((app) => app.isMoving);
+	}, [runningApps]);
+
 	return {
 		runningApps,
 		focusApp,
@@ -95,5 +99,6 @@ export const useRunningAppContext = () => {
 		minimizeApp,
 		beginAppMovement,
 		endAppMovement,
+		hasAppMovement,
 	};
 };
