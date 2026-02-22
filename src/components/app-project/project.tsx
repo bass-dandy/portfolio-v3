@@ -5,7 +5,8 @@ import styles from './project.module.css';
 const Project: React.FC<{
 	description?: React.ReactNode;
 	url: string;
-}> = ({description, url}) => {
+	isFocused: boolean;
+}> = ({description, url, isFocused}) => {
 	const {hasAppMovement} = useRunningAppContext();
 
 	return (
@@ -21,7 +22,7 @@ const Project: React.FC<{
 					this mask is a bit of a hack to prevent the iframe from interfering with window
 					drag + resize actions (it would otherwise swallow mouseup and mousemove events)
 				*/}
-				{hasAppMovement() ? <div className={styles.contentMask} /> : null}
+				{hasAppMovement() || !isFocused ? <div className={styles.contentMask} /> : null}
 			</div>
 		</div>
 	);

@@ -29,8 +29,8 @@ const AboutMe = {
 	name: 'About Me',
 	iconSrc: '/img/app-icons/about-me.png',
 	content: AboutMeApp,
-	width: 530,
-	height: 450,
+	width: 700,
+	height: 500,
 	minWidth: 300,
 	minHeight: 200
 } as const satisfies AnonymousApp;

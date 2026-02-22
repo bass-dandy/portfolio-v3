@@ -73,8 +73,12 @@ export default function Window({
 			? getInitialLeft(containerWidth, appConfig.width, {center: runningApps.length === 1})
 			: 0
 	);
-	const [width, setWidth] = useState(isResizable ? appConfig.width : 0);
-	const [height, setHeight] = useState(isResizable ? appConfig.height : 0);
+	const [width, setWidth] = useState(
+		isResizable ? Math.min(appConfig.width, containerWidth) : 0
+	);
+	const [height, setHeight] = useState(
+		isResizable ? Math.min(appConfig.height, containerHeight) : 0
+	);
 	const [dragOffsetTop, setDragOffsetTop] = useState(0);
 	const [dragOffsetLeft, setDragOffsetLeft] = useState(0);
 	const [isMaximized, setIsMaximized] = useState(false);

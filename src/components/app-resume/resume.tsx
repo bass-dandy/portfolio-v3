@@ -8,7 +8,7 @@ import styles from './resume.module.css';
 
 const resumePdf = '/docs/resume.pdf';
 
-export default function Resume() {
+export default function Resume({isFocused}: {isFocused: boolean}) {
 	const {hasAppMovement} = useRunningAppContext();
 	const iframe = useRef<HTMLIFrameElement>(null);
 
@@ -43,7 +43,7 @@ export default function Resume() {
 					this mask is a bit of a hack to prevent the iframe from interfering with window
 					drag + resize actions (it would otherwise swallow mouseup and mousemove events)
 				*/}
-				{hasAppMovement() ? <div className={styles.mask} /> : null}
+				{hasAppMovement() || !isFocused ? <div className={styles.mask} /> : null}
 			</div>
 		</div>
 	);
