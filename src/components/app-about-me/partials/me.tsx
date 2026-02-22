@@ -21,16 +21,16 @@ const AppLink: React.FC<{ children: React.ReactNode, appName: AppName }> = ({chi
 const Me: React.FC = () => (
 	<>
 		<Image
-			src="/img/about-me/headshot.png"
+			src="/img/about-me/me.jpg"
 			alt="photo of some nerd (me)"
-			width={442}
-			height={717}
+			width={1063}
+			height={1419}
 			className={styles.headshot}
 		/>
 		<p className={styles.paragraph}>
 			Hello! My name is Christian Dinh and I&apos;m a front-end web developer living in NYC. You can check
 			out <AppLink appName="Resume">my resume</AppLink> for a more detailed description of my experience, and if you&apos;re
-			interested in examples of my work then maybe have a look at <AppLink appName="My Projects">my personal projects</AppLink> :D
+			interested in examples of my work then have a look at <AppLink appName="My Projects">my personal projects</AppLink> :D
 		</p>
 		<p className={styles.paragraph}>
 			Outside of work, I love music! I play a few instruments (mostly bass),
@@ -44,6 +44,7 @@ const Me: React.FC = () => (
 		<p className={styles.paragraph}>
 			This website is written with React and TypeScript, built to a static export with Next.js, and hosted on GitHub.
 			Behold its vital <a href="https://github.com/bass-dandy/portfolio-v3" target="blank">source code</a> at your leisure.
+			No generative AI was used in the creation of this website or any others I&apos;ve made.
 		</p>
 	</>
 );

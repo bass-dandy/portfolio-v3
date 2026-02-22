@@ -13,6 +13,32 @@ import ResizeHandle from './window-resize-handle';
 
 import styles from './window.module.css';
 
+function getInitialTop(
+	containerHeight: number,
+	windowHeight: number,
+	opts?: {center: boolean}
+) {
+	if (opts?.center && windowHeight <= containerHeight) {
+		return containerHeight / 2 - windowHeight / 2;
+	}
+	// randomize initial vertical position to the top 1/4 of the viewport
+	return Math.random() * clamp(containerHeight - windowHeight, 0, containerHeight / 4);
+}
+
+function getInitialLeft(
+	containerWidth: number,
+	windowWidth: number,
+	opts?: {center: boolean}
+) {
+	if (opts?.center && windowWidth <= containerWidth) {
+		return containerWidth / 2 - windowWidth / 2;
+	}
+	// randomize initial horizontal position, clearing desktop icons (which are 85px wide) if able
+	return containerWidth - windowWidth >= 85
+		? Math.random() * (containerWidth - windowWidth - 85) + 85
+		: Math.random() * Math.max(containerWidth - windowWidth, 0)
+}
+
 interface WindowProps {
 	appWindow: RunningApp;
 	containerWidth: number;
@@ -34,10 +60,19 @@ export default function Window({
 		beginAppMovement,
 		endAppMovement,
 		hasAppMovement,
+		runningApps,
 	} = useRunningAppContext();
 
-	const [top, setTop] = useState(0);
-	const [left, setLeft] = useState(0);
+	const [top, setTop] = useState(
+		isResizable
+			? getInitialTop(containerHeight, appConfig.height, {center: runningApps.length === 1})
+			: 0
+	);
+	const [left, setLeft] = useState(
+		isResizable
+			? getInitialLeft(containerWidth, appConfig.width, {center: runningApps.length === 1})
+			: 0
+	);
 	const [width, setWidth] = useState(isResizable ? appConfig.width : 0);
 	const [height, setHeight] = useState(isResizable ? appConfig.height : 0);
 	const [dragOffsetTop, setDragOffsetTop] = useState(0);
@@ -58,49 +93,48 @@ export default function Window({
 		}
 	}, [appWindow.isMinimized]);
 
-	const unmaximizeWithDrag = useCallback((x: number, y: number) => {
-		if (x < left) {
-			setDragOffsetLeft(Math.min(x, Math.ceil(width / 2)));
-		} else if (x > left + width) {
-			setDragOffsetLeft(
-				Math.max(
-					width - (containerWidth - x),
-					Math.ceil(width / 2)
-				)
-			);
-		}
-		setLeft(x);
-		setTop(0);
-		setDragOffsetTop(y);
-		setIsMaximized(false);
-	}, [left, width, setIsMaximized, containerWidth]);
-
 	const handleDragStart = useCallback((e: MouseEvent) => {
+		if (isMaximized) {
+			if (e.clientX < left) {
+				setDragOffsetLeft(
+					Math.min(e.clientX, Math.ceil(width / 2))
+				);
+			} else if (e.clientX > left + width) {
+				setDragOffsetLeft(
+					Math.max(
+						width - (containerWidth - e.clientX),
+						Math.ceil(width / 2)
+					)
+				);
+			}
+			setTop(0);
+			setDragOffsetTop(e.clientY);
+		} else {
+			setDragOffsetLeft(e.clientX - left);
+			setDragOffsetTop(e.clientY - top);
+		}
 		beginAppMovement(appWindow.name);
-		setDragOffsetLeft(e.clientX - left);
-		setDragOffsetTop(e.clientY - top);
-	}, [appWindow, beginAppMovement, left, top]);
+	}, [appWindow, beginAppMovement, left, top, isMaximized, containerWidth, width]);
 
 	const handleWindowDrag = useCallback((e: MouseEvent) => {
 		if (isMaximized) {
-			unmaximizeWithDrag(e.clientX, e.clientY);
-		} else {
-			setTop(
-				clamp(
-					e.clientY - dragOffsetTop,
-					0,
-					containerHeight - (headerRef.current?.clientHeight ?? 0) - 6 // 6 = margin + border
-				)
-			);
-			setLeft(
-				clamp(
-					e.clientX - dragOffsetLeft,
-					-dragOffsetLeft,
-					containerWidth - dragOffsetLeft
-				)
-			);
+			setIsMaximized(false);
 		}
-	}, [isMaximized, dragOffsetLeft, dragOffsetTop, unmaximizeWithDrag, containerWidth, containerHeight]);
+		setTop(
+			clamp(
+				e.clientY - dragOffsetTop,
+				0,
+				containerHeight - (headerRef.current?.clientHeight ?? 0) - 6 // 6 = margin + border
+			)
+		);
+		setLeft(
+			clamp(
+				e.clientX - dragOffsetLeft,
+				-dragOffsetLeft,
+				containerWidth - dragOffsetLeft
+			)
+		);
+	}, [isMaximized, dragOffsetLeft, dragOffsetTop, containerWidth, containerHeight]);
 
 	const handleWindowResize = useCallback((e: MouseEvent) => {
 		if (!isResizable) return;

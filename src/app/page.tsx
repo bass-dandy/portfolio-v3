@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react';
 
-import type {RunningApp} from '@/apps';
+import {appsByName, type RunningApp} from '@/apps';
 import Desktop from '@/components/desktop';
 import Taskbar from '@/components/taskbar';
 import {RunningAppContext} from '@/context';
@@ -15,6 +15,15 @@ const Home: React.FC = () => {
 	const [runningApps, setRunningApps] = useState<RunningApp[]>([]);
 
 	useEffect(() => {
+		setRunningApps([
+		{
+			...appsByName['About Me'],
+			isFocused: true,
+			isMinimized: false,
+			isMoving: false,
+		},
+		]);
+
 		const keydownListener = (e: KeyboardEvent) => {
 			if (e.keyCode === TAB) {
 				document.body.classList.add(styles.keyboardAccessible);

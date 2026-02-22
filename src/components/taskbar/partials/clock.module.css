@@ -7,4 +7,5 @@
 	justify-content: flex-end;
 	box-sizing: border-box;
 	padding: 3px;
+	user-select: none;
 }
