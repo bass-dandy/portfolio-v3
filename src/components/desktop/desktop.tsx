@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'motion/react'
 import React, {useState, useEffect, useRef} from 'react';
 
 import {desktopApps} from '@/apps';
@@ -33,14 +34,21 @@ export default function Desktop() {
 					<DesktopIcon key={app.name} app={app} />
 				))}
 			</div>
-			{runningApps.map((appWindow) => (
-				<Window
-					key={appWindow.name}
-					appWindow={appWindow}
-					containerWidth={containerWidth}
-					containerHeight={containerHeight}
-				/>
-			))}
+			<AnimatePresence>
+				{runningApps.map((appWindow) => (
+					<motion.div
+						key={appWindow.name}
+						exit={{opacity: 0}}
+						transition={{duration: 0.075, ease: 'easeOut'}}
+					>
+						<Window
+							appWindow={appWindow}
+							containerWidth={containerWidth}
+							containerHeight={containerHeight}
+						/>
+					</motion.div>
+				))}
+			</AnimatePresence>
 		</div>
 	);
 }

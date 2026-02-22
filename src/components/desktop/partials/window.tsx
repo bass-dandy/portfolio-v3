@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import classnames from 'classnames';
 
@@ -164,7 +165,7 @@ export default function Window({
 	}, [appWindow, endAppMovement]);
 
 	return (
-		<div
+		<motion.div
 			className={classnames(styles.window, {
 				[styles.focused]: appWindow.isFocused,
 				[styles.minimized]: appWindow.isMinimized,
@@ -176,6 +177,9 @@ export default function Window({
 				width: isResizable ? width : 'auto',
 				height: isResizable ? height : 'auto',
 			}}
+			initial={{opacity: 0, scale: 0.95}}
+			animate={{opacity: 1, scale: 1}}
+			transition={{duration: 0.075, ease: 'easeOut'}}
 			onMouseDown={() => focusApp(appWindow.name)}
 		>
 			<div className={styles.header} ref={headerRef}>
@@ -217,6 +221,6 @@ export default function Window({
 					/>
 				</div>
 			) : null}
-		</div>
+		</motion.div>
 	);
 }
