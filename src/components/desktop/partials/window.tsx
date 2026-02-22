@@ -33,9 +33,10 @@ function getInitialLeft(
 	if (opts?.center && windowWidth <= containerWidth) {
 		return containerWidth / 2 - windowWidth / 2;
 	}
-	// randomize initial horizontal position, clearing desktop icons (which are 85px wide) if able
-	return containerWidth - windowWidth >= 85
-		? Math.random() * (containerWidth - windowWidth - 85) + 85
+	// randomize initial horizontal position, clearing desktop icons if able
+	const ICON_WIDTH = 85;
+	return containerWidth - windowWidth >= ICON_WIDTH
+		? Math.random() * (containerWidth - windowWidth - ICON_WIDTH) + ICON_WIDTH
 		: Math.random() * Math.max(containerWidth - windowWidth, 0)
 }
 
