@@ -37,6 +37,10 @@ export default forwardRef<TitleButtonsRef, TitleButtonsProps>(function TitleButt
 			<Button
 				className={styles.minimize}
 				onClick={onMinimize}
+				onMouseDown={(e) => {
+					// prevent window from becoming focused if minimized while unfocused
+					e.stopPropagation();
+				}}
 				aria-label="minimize window"
 			>
 				<Image src="/img/window/minimize.png" alt="" width={50} height={50} />
@@ -58,6 +62,10 @@ export default forwardRef<TitleButtonsRef, TitleButtonsProps>(function TitleButt
 			<Button
 				className={styles.close}
 				onClick={onClose}
+				onMouseDown={(e) => {
+					// prevent window from becoming focused if closed while unfocused
+					e.stopPropagation();
+				}}
 				ref={closeButton}
 				aria-label="close window"
 			>
