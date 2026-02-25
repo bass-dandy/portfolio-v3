@@ -36,6 +36,7 @@ export default function Taskbar() {
 						onClick={() => focusApp(app.name)}
 						key={app.name}
 						aria-label={!app.isFocused ? `focus ${app.name}` : ''}
+						id={`taskbar-${app.name.replace(' ', '-')}`}
 					>
 						<Image
 							src={appsByName[app.name].iconSrc}

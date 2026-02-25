@@ -2,30 +2,10 @@
 	composes: outset from '@/app/page.module.css';
 	display: flex;
 	flex-direction: column;
-	position: absolute;
 	background-color: var(--grayPrimary);
 	box-sizing: border-box;
-}
-
-.maximized {
-	top: 0 !important;
-	left: 0 !important;
-	width: 100% !important;
-	height: 100% !important;
-	transition: 0.1s ease-out;
-}
-
-.minimized {
-	display: none;
-}
-
-.focused {
-	z-index: 500;
-}
-
-.focused .header {
-	background: linear-gradient(90deg, var(--pink), var(--mint) 105%);
-	color: var(--pinkDark);
+	width: 100%;
+	height: 100%;
 }
 
 .header {
@@ -35,6 +15,11 @@
 	background-color: var(--grayInset);
 	color: var(--grayPrimary);
 	user-select: none;
+}
+
+.header.focused {
+	background: linear-gradient(90deg, var(--pink), var(--mint) 105%);
+	color: var(--pinkDark);
 }
 
 .content {
@@ -54,13 +39,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-	.window {
-		top: 0 !important;
-		left: 0 !important;
-		width: 100% !important;
-		height: 100% !important;
-	}
-
 	.header {
 		font-size: 1.5rem;
 	}

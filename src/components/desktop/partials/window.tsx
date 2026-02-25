@@ -8,6 +8,7 @@ import {clamp} from '@/util';
 
 import Directory from '../../app-directory';
 import ErrorBoundary from '../../error-boundary';
+import WindowMover from './window-mover';
 import TitleButtons, {type TitleButtonsRef} from './window-title-buttons';
 import DragHandle from './window-drag-handle';
 import ResizeHandle from './window-resize-handle';
@@ -165,62 +166,66 @@ export default function Window({
 	}, [appWindow, endAppMovement]);
 
 	return (
-		<motion.div
-			className={classnames(styles.window, {
-				[styles.focused]: appWindow.isFocused,
-				[styles.minimized]: appWindow.isMinimized,
-				[styles.maximized]: isMaximized,
-			})}
-			style={{
-				top,
-				left,
-				width: isResizable ? width : 'auto',
-				height: isResizable ? height : 'auto',
-			}}
-			initial={{opacity: 0, scale: 0.95}}
-			animate={{opacity: 1, scale: 1}}
-			transition={{duration: 0.075, ease: 'easeOut'}}
-			onMouseDown={() => focusApp(appWindow.name)}
+		<WindowMover
+			appWindow={appWindow}
+			isMaximized={isMaximized}
+			top={top}
+			left={left}
+			width={isResizable ? width : undefined}
+			height={isResizable ? height : undefined}
 		>
-			<div className={styles.header} ref={headerRef}>
-				<DragHandle
-					title={appWindow.name}
-					iconSrc={appConfig.iconSrc}
-					onDragStart={handleDragStart}
-					onDrag={handleWindowDrag}
-					onDragEnd={handleMovementEnd}
-				/>
-				<TitleButtons
-					ref={titleButtonsRef}
-					onMinimize={() => minimizeApp(appWindow.name)}
-					onMaximize={() => setIsMaximized((val) => !val)}
-					onClose={() => killApp(appWindow.name)}
-					canMaximize={isResizable}
-					isMaximized={isMaximized}
-				/>
-			</div>
-			<div
-				className={classnames(styles.content, {
-					[styles.disableSelect]: hasAppMovement(),
-				})}
+			<motion.div
+				className={styles.window}
+				initial={{opacity: 0, scale: 0.95}}
+				animate={{opacity: 1, scale: 1}}
+				transition={{duration: 0.075, ease: 'easeOut'}}
+				onMouseDown={() => focusApp(appWindow.name)}
 			>
-				<ErrorBoundary onCatch={() => killApp(appWindow.name)}>
-					{Array.isArray(appConfig.content) ? (
-						<Directory contents={appConfig.content} />
-					) : (
-						<appConfig.content {...appWindow} />
-					)}
-				</ErrorBoundary>
-			</div>
-			{isResizable && !isMaximized ? (
-				<div className={styles.footer}>
-					<ResizeHandle
-						onResizeStart={handleResizeStart}
-						onResize={handleWindowResize}
-						onResizeEnd={handleMovementEnd}
+				<div
+					className={classnames(styles.header, {
+						[styles.focused]: appWindow.isFocused,
+					})}
+					ref={headerRef}
+				>
+					<DragHandle
+						title={appWindow.name}
+						iconSrc={appConfig.iconSrc}
+						onDragStart={handleDragStart}
+						onDrag={handleWindowDrag}
+						onDragEnd={handleMovementEnd}
+					/>
+					<TitleButtons
+						ref={titleButtonsRef}
+						onMinimize={() => minimizeApp(appWindow.name)}
+						onMaximize={() => setIsMaximized((val) => !val)}
+						onClose={() => killApp(appWindow.name)}
+						canMaximize={isResizable}
+						isMaximized={isMaximized}
 					/>
 				</div>
-			) : null}
-		</motion.div>
+				<div
+					className={classnames(styles.content, {
+						[styles.disableSelect]: hasAppMovement(),
+					})}
+				>
+					<ErrorBoundary onCatch={() => killApp(appWindow.name)}>
+						{Array.isArray(appConfig.content) ? (
+							<Directory contents={appConfig.content} />
+						) : (
+							<appConfig.content {...appWindow} />
+						)}
+					</ErrorBoundary>
+				</div>
+				{isResizable && !isMaximized ? (
+					<div className={styles.footer}>
+						<ResizeHandle
+							onResizeStart={handleResizeStart}
+							onResize={handleWindowResize}
+							onResizeEnd={handleMovementEnd}
+						/>
+					</div>
+				) : null}
+			</motion.div>
+		</WindowMover>
 	);
 }
