@@ -3,16 +3,8 @@
 	transform-origin: top left;
 }
 
-.hideContent {
-	display: none;
-}
-
 .maximized {
 	transition: 0.1s ease-out;
-}
-
-.focused {
-	z-index: 500;
 }
 
 @media only screen and (max-width: 600px) {

@@ -11,6 +11,7 @@
   "dependencies": {
     "@bass_dandy/w0rm": "2.2.3",
     "classnames": "^2.2.6",
+    "immer": "^11.1.4",
     "motion": "^12.34.3",
     "next": "15.1.8",
     "prop-types": "^15.7.2",

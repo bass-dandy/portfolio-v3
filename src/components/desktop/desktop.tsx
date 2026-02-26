@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react'
+import {AnimatePresence} from 'motion/react'
 import React, {useState, useEffect, useRef} from 'react';
 
 import {desktopApps} from '@/apps';
@@ -35,18 +35,17 @@ export default function Desktop() {
 				))}
 			</div>
 			<AnimatePresence>
-				{runningApps.map((appWindow) => (
-					<motion.div
-						key={appWindow.name}
-						exit={{opacity: 0}}
+				{Array.from(runningApps.values()).map((app) => (
+					<Window
+						key={app.name}
+						initial={{opacity: 0, scale: 0.95}}
+						animate={{opacity: 1, scale: 1}}
+						exit={{opacity: 0, scale: 0.95}}
 						transition={{duration: 0.075, ease: 'easeOut'}}
-					>
-						<Window
-							appWindow={appWindow}
-							containerWidth={containerWidth}
-							containerHeight={containerHeight}
-						/>
-					</motion.div>
+						appWindow={app}
+						containerWidth={containerWidth}
+						containerHeight={containerHeight}
+					/>
 				))}
 			</AnimatePresence>
 		</div>

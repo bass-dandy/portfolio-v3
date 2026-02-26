@@ -24,10 +24,9 @@ export default function Taskbar() {
 		<div className={styles.taskbar}>
 			<StartMenu />
 			<div className={styles.taskbarApps}>
-				{runningApps.map((app) => (
+				{Array.from(runningApps.values()).map((app) => (
 					<button
 						ref={(e) => {
-							if (appRefs.current)
 							appRefs.current[app.name] = e;
 						}}
 						className={classnames(styles.taskbarApp, {
@@ -46,7 +45,7 @@ export default function Taskbar() {
 						/>
 						{app.name}
 					</button>
-				)) }
+				))}
 			</div>
 			<Clock />
 		</div>

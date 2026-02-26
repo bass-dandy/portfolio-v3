@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import {motion} from 'motion/react'
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import classnames from 'classnames';
 
@@ -46,12 +46,14 @@ interface WindowProps {
 	appWindow: RunningApp;
 	containerWidth: number;
 	containerHeight: number;
+	ref: React.Ref<HTMLDivElement>;
 }
 
-export default function Window({
+function Window({
 	appWindow,
 	containerWidth,
 	containerHeight,
+	ref,
 }: WindowProps) {
 	const appConfig = appsByName[appWindow.name];
 	const isResizable = appIsResizable(appConfig);
@@ -68,12 +70,12 @@ export default function Window({
 
 	const [top, setTop] = useState(
 		isResizable
-			? getInitialTop(containerHeight, appConfig.height, {center: runningApps.length === 1})
+			? getInitialTop(containerHeight, appConfig.height, {center: runningApps.size === 1})
 			: 0
 	);
 	const [left, setLeft] = useState(
 		isResizable
-			? getInitialLeft(containerWidth, appConfig.width, {center: runningApps.length === 1})
+			? getInitialLeft(containerWidth, appConfig.width, {center: runningApps.size === 1})
 			: 0
 	);
 	const [width, setWidth] = useState(
@@ -174,11 +176,9 @@ export default function Window({
 			width={isResizable ? width : undefined}
 			height={isResizable ? height : undefined}
 		>
-			<motion.div
+			<div
+				ref={ref}
 				className={styles.window}
-				initial={{opacity: 0, scale: 0.95}}
-				animate={{opacity: 1, scale: 1}}
-				transition={{duration: 0.075, ease: 'easeOut'}}
 				onMouseDown={() => focusApp(appWindow.name)}
 			>
 				<div
@@ -225,7 +225,9 @@ export default function Window({
 						/>
 					</div>
 				) : null}
-			</motion.div>
+			</div>
 		</WindowMover>
 	);
 }
+
+export default motion.create(Window);

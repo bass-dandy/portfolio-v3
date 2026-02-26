@@ -1,28 +1,32 @@
 'use client'
 
+import {enableMapSet} from 'immer';
 import {useEffect, useState} from 'react';
 
-import {appsByName, type RunningApp} from '@/apps';
+import {appsByName, type AppName, type RunningApp} from '@/apps';
 import Desktop from '@/components/desktop';
 import Taskbar from '@/components/taskbar';
 import {RunningAppContext} from '@/context';
 
-import styles from "./page.module.css";
+import styles from './page.module.css';
 
+enableMapSet();
 const TAB = 9;
 
 const Home: React.FC = () => {
-	const [runningApps, setRunningApps] = useState<RunningApp[]>([]);
+	const [runningApps, setRunningApps] = useState(new Map<AppName, RunningApp>());
+	const [renderOrder, setRenderOrder] = useState<AppName[]>([]);
 
 	useEffect(() => {
-		setRunningApps([
-		{
-			...appsByName['About Me'],
-			isFocused: true,
-			isMinimized: false,
-			isMoving: false,
-		},
-		]);
+		setRunningApps(new Map([
+			['About Me', {
+				...appsByName['About Me'],
+				isFocused: true,
+				isMinimized: false,
+				isMoving: false,
+			}]
+		]));
+		setRenderOrder(['About Me'])
 
 		const keydownListener = (e: KeyboardEvent) => {
 			if (e.keyCode === TAB) {
@@ -43,7 +47,14 @@ const Home: React.FC = () => {
 	}, []);
 
 	return (
-		<RunningAppContext.Provider value={{runningApps, setRunningApps}}>
+		<RunningAppContext.Provider
+			value={{
+				runningApps,
+				setRunningApps,
+				renderOrder,
+				setRenderOrder,
+			}}
+		>
 			<Desktop/>
 			<Taskbar/>
 		</RunningAppContext.Provider>

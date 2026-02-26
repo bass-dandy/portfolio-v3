@@ -3,6 +3,7 @@ import {motion} from 'motion/react'
 import {useMemo, useRef} from 'react';
 
 import type {AppName, RunningApp} from '@/apps';
+import {useRunningAppContext} from '@/context';
 import styles from './window-mover.module.css';
 
 // minimize window to taskbar with fly in/out effect
@@ -38,6 +39,7 @@ function WindowMover({
 	height?: number;
 	children: React.ReactNode;
 }) {
+	const {renderOrder} = useRunningAppContext();
 	const ref = useRef<HTMLDivElement>(null);
 
 	// this value must be memoized to avoid re-calculating an incorrect size while the window is minimized
@@ -47,11 +49,14 @@ function WindowMover({
 			: undefined;
 	}, [appWindow.name, appWindow.isMinimized]);
 
+	const zIndex = useMemo(() => {
+		return Math.max(renderOrder.indexOf(appWindow.name), 0);
+	}, [appWindow.name, renderOrder]);
+
 	return (
 		<motion.div
 			ref={ref}
 			className={classnames(styles.windowMover, {
-				[styles.focused]: appWindow.isFocused,
 				[styles.maximized]: isMaximized,
 			})}
 			style={isMaximized ? {
@@ -59,11 +64,13 @@ function WindowMover({
 				left: 0,
 				width: '100%',
 				height: '100%',
+				zIndex,
 			} : {
 				top,
 				left,
 				width: width ?? 'auto',
 				height: height ?? 'auto',
+				zIndex,
 			}}
 			animate={minimizeTarget}
 			transition={appWindow.isMinimized ? {
