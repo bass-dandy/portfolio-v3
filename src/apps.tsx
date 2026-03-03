@@ -69,9 +69,11 @@ const Simpai = {
 			description={(
 				<>
 					SimPAI is a tool for inspecting text-based resources within a Sims 2 .package file, useful for
-					authoring simple mods (eg: custom careers). The web app is written in Svelte and is distributed
-					via pnpm monorepo alongside a parsing library I also authored. This project is heavily based
-					on SimPE, the de-facto Sims 2 modding tool.
+					creating and editing simple mods (eg: custom careers). The web app is written in Svelte and distributed
+					via pnpm monorepo alongside a parsing/serialization library I also authored. You can download
+					the <a href="/docs/career_adult_Crunchwrap_Supreme.package">Crunchwrap Supreme custom career</a> I
+					made with this tool if you&apos;d like to play around with the interface (or add it to your own game
+					for some reason). Heavily based on SimPE, the de-facto Sims 2 modding tool.
 				</>
 			)}
 			url="https://bass-dandy.github.io/simpai"
@@ -117,7 +119,7 @@ const ACNHChecklists = {
 	iconSrc: '/img/app-icons/acnh.png',
 	content: (props: AppProps) => (
 		<ProjectApp
-			description="A checklist for tracking collectibles in Animal Crossing: New Horizons. Technically very jank - for some reason I wanted to homebrew a React static page emitter. It was largely a CSS project anyway, and all animations you see are pure CSS. Check out the light / dark mode transition in the upper left!"
+			description="A checklist for tracking collectibles in Animal Crossing: New Horizons. Technically very jank - for some reason I wanted to homebrew a React static page emitter. It was largely a CSS project anyway, and all animations you see are pure CSS (well, SASS). Check out the light / dark mode transition in the upper left!"
 			url="https://bass-dandy.github.io/acnh-checklists"
 			{...props}
 		/>
@@ -133,7 +135,7 @@ const UnifiedSandwichFramework = {
 	iconSrc: '/img/app-icons/sandwich.png',
 	content: (props: AppProps) => (
 		<ProjectApp
-			description="A simple site explaining my unified sandwich theory. Literally just HTML/CSS/JS like the good old days!"
+			description="A simple site explaining my unified sandwich theory. Just plain HTML/CSS/JS like the good(?) old days!"
 			url="https://sandwich.one"
 			{...props}
 		/>
@@ -149,7 +151,14 @@ const Homeward = {
 	iconSrc: '/img/app-icons/homeward.webp',
 	content: (props: AppProps) => (
 		<ProjectApp
-			description="A Svelte app for visualizing Dark Souls 3 fog gate randomizer spoiler logs as a network graph."
+			description={(
+				<>
+					A Svelte app for visualizing Dark Souls 3 fog gate randomizer spoiler logs as a network
+					graph. If you&apos;d like to poke around the interface you can download
+					the <a href="/docs/ds3_rando_spoiler_sample.txt" download>spoiler log</a> from my first
+					rando run, during which I got so lost I was inspired to build this in the first place.
+				</>
+			)}
 			url="https://bass-dandy.github.io/homeward"
 			{...props}
 		/>

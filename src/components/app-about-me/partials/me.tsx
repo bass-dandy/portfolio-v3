@@ -5,7 +5,10 @@ import {useRunningAppContext} from '@/context';
 
 import styles from './me.module.css';
 
-const AppLink: React.FC<{ children: React.ReactNode, appName: AppName }> = ({children, appName}) => {
+const AppLink: React.FC<{
+	children: React.ReactNode;
+	appName: AppName;
+}> = ({children, appName}) => {
 	const {launchApp} = useRunningAppContext();
 
 	return (
@@ -28,7 +31,7 @@ const Me: React.FC = () => (
 			className={styles.headshot}
 		/>
 		<p className={styles.paragraph}>
-			Hello! My name is Christian Dinh and I&apos;m a front-end web developer living in NYC. You can check
+			Hello! My name is Chris and I&apos;m a front-end web developer living in NYC. You can check
 			out <AppLink appName="Resume">my resume</AppLink> for a more detailed description of my experience, and if you&apos;re
 			interested in examples of my work then have a look at <AppLink appName="My Projects">my personal projects</AppLink> :D
 		</p>
