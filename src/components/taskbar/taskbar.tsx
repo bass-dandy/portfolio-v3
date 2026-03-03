@@ -1,3 +1,4 @@
+import {motion} from 'motion/react'
 import React, {useEffect, useRef} from 'react';
 import classnames from 'classnames';
 import Image from 'next/image';
@@ -25,7 +26,9 @@ export default function Taskbar() {
 			<StartMenu />
 			<div className={styles.taskbarApps}>
 				{Array.from(runningApps.values()).map((app) => (
-					<button
+					<motion.button
+						layout
+						transition={{ease: 'easeOut', duration: 0.15}}
 						ref={(e) => {
 							appRefs.current[app.name] = e;
 						}}
@@ -44,7 +47,7 @@ export default function Taskbar() {
 							height={50}
 						/>
 						{app.name}
-					</button>
+					</motion.button>
 				))}
 			</div>
 			<Clock />
