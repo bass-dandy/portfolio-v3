@@ -40,8 +40,10 @@ const AboutMe: React.FC = () => {
 					)) }
 				</ArrowKeyFocus>
 			</div>
-			<div className={styles.content}>
-				<TabComponent />
+			<div className={styles.contentOuter}>
+				<div className={styles.contentInner}>
+					<TabComponent />
+				</div>
 			</div>
 		</div>
 	);

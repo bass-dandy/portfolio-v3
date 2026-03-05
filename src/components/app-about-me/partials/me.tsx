@@ -22,7 +22,7 @@ const AppLink: React.FC<{
 }
 
 const Me: React.FC = () => (
-	<>
+	<div className={styles.content}>
 		<Image
 			src="/img/about-me/me.jpg"
 			alt="photo of some nerd (me)"
@@ -49,7 +49,7 @@ const Me: React.FC = () => (
 			Behold its vital <a href="https://github.com/bass-dandy/portfolio-v3" target="blank">source code</a> at your leisure.
 			No generative AI was used in the creation of this website or any others I&apos;ve made.
 		</p>
-	</>
+	</div>
 );
 
 export default Me;

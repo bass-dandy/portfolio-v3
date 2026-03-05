@@ -8,11 +8,17 @@
 
 .tabs {
 	display: flex;
+	align-items: flex-end;
+}
+
+.tab {
+	composes: outset from '@/app/page.module.css';
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 
 .tab, .tab:active {
-	flex: 1;
-	padding: 5px;
+	padding: 5px 15px;
 	border-bottom: 0;
 }
 
@@ -24,26 +30,25 @@
 }
 
 .activeTab {
-	composes: inset from '@/app/page.module.css';
 	position: relative;
-	background-color: var(--white);
+	top: 2px;
 }
 
-.activeTab::after {
-	content: "";
-	position: absolute;
-	bottom: -2px;
-	left: 0;
-	right: -2px;
-	height: 2px;
-	background-color: var(--white);
+.tab:not(.activeTab) {
+	padding-bottom: 0px;
 }
 
-.content {
+.contentOuter {
+	composes: outset from '@/app/page.module.css';
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	padding: 4px;
+}
+
+.contentInner {
 	composes: inset from '@/app/page.module.css';
 	flex: 1;
-	padding: 10px;
 	overflow: auto;
-	background-color: var(--white);
-	background-size: 3px 3px;
 }

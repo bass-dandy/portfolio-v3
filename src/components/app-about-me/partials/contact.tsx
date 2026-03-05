@@ -1,32 +1,31 @@
-import React from 'react';
+import {Button} from '@/components/button';
+import styles from './contact.module.css';
 
 const Contact: React.FC = () => (
-	<div>
-		Thanks for visiting! If you would like to contact me, here are a few options:
-		<ul>
-			<li>
-				<a href="mailto:christian.t.dinh@gmail.com">
-					christian.t.dinh@gmail.com
-				</a>
-			</li>
-			<li>
-				<a
-					href="https://github.com/bass-dandy"
-					target="blank"
-				>
-					Github
-				</a>
-			</li>
-			<li>
-				<a
-					href="https://www.linkedin.com/in/christiandinh/"
-					target="blank"
-				>
-					Linkedin
-				</a>
-			</li>
-		</ul>
-	</div>
+	<form
+		className={styles.form}
+		action="https://formspree.io/f/xgolgggk"
+		method="POST"
+	>
+		<label>
+			Your email:
+			<input
+				type="email"
+				name="email"
+				className={styles.formField}
+			/>
+		</label>
+		<label className={styles.message}>
+			Your message:
+			<textarea
+				name="message"
+				className={styles.formField}
+			/>
+		</label>
+		<Button type="submit">
+			Send
+		</Button>
+	</form>
 );
 
 export default Contact;
