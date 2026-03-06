@@ -24,7 +24,7 @@ const AppLink: React.FC<{
 const Me: React.FC = () => (
 	<div className={styles.content}>
 		<Image
-			src="/img/about-me/me.jpg"
+			src="/img/about-me/me.webp"
 			alt="photo of some nerd (me)"
 			width={1063}
 			height={1419}

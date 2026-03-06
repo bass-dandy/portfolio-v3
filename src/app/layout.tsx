@@ -16,7 +16,7 @@ const Layout: React.FC<{children: React.ReactNode}> = ({children}) => {
 	};
 
 	return (
-		<html>
+		<html lang="en">
 			<body>
 				<Script id="page-schema" type="application/ld+json">
 					{JSON.stringify(schema)}
