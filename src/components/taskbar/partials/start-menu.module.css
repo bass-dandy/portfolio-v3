@@ -29,47 +29,32 @@
 	pointer-events: none;
 }
 
-@keyframes slidein {
-	to { height: 400px; }
-}
-
-@keyframes fadeout {
-	to { opacity: 0; }
-}
-
 .startMenu {
 	composes: outset from '@/app/page.module.css';
 	display: flex;
 	position: absolute;
-	height: 0;
 	max-height: calc(100vh - var(--taskbarHeight));
 	width: 250px;
 	left: 0;
 	bottom: 100%;
 	margin-bottom: 2px;
 	background-color: var(--grayPrimary);
-	animation: slidein 0.15s ease-out forwards;
 }
 
-.menuLogo {
+.menuStripeBG {
 	position: relative;
 	height: 100%;
 	width: 35px;
-	background: linear-gradient(0deg, var(--pink), var(--mint) 115%);
+	background-color: var(--pink);
 }
 
-.menuLogo::after {
-	content: "";
-	display: block;
+.menuStripeFG {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: var(--pink);
-	opacity: 1;
-	z-index: 1;
-	animation: fadeout 0.2s ease-out 0.2s forwards;
+	background: linear-gradient(0deg, var(--pink), var(--mint) 115%);
 }
 
 .verticalText {

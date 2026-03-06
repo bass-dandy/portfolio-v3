@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React, {useState, useRef} from 'react';
 import classnames from 'classnames';
+import {AnimatePresence, motion} from 'motion/react';
 
 import {desktopApps} from '@/apps';
 import {useRunningAppContext} from '@/context';
@@ -43,23 +44,38 @@ export default function StartButton() {
 				<Image src="/img/start.png" alt="" width={178} height={178} />
 				Start
 			</button>
-			{isOpen ? (
-				<div className={styles.startMenu}>
-					<div className={styles.menuLogo}>
-						<div className={styles.verticalText}>
-							pizza-pizza
+			<AnimatePresence>
+				{isOpen ? (
+					<motion.div
+						className={styles.startMenu}
+						initial={{translateY: 0, overflow: 'hidden'}}
+						animate={{height: 400, overflow: 'visible'}}
+						exit={{height: 0, overflow: 'hidden'}}
+						transition={{ease: 'easeOut', duration: 0.15}}
+					>
+						<div className={styles.menuStripeBG}>
+							<motion.div
+								className={styles.menuStripeFG}
+								initial={{opacity: 0}}
+								animate={{opacity: 1}}
+								transition={{ease: 'easeOut', duration: 0.15, delay: 0.15}}
+							>
+								<div className={styles.verticalText}>
+									pizza-pizza
+								</div>
+							</motion.div>
 						</div>
-					</div>
-					<StartMenuAppList
-						apps={desktopApps}
-						launchApp={(app) => {
-							// timeout prevents the window from closing as soon as it opens when using keyboard controls
-							window.setTimeout(() => launchApp(app), 10);
-							setIsOpen(false);
-						}}
-					/>
-				</div>
-			) : null}
+						<StartMenuAppList
+							apps={desktopApps}
+							launchApp={(app) => {
+								// timeout prevents the window from closing as soon as it opens when using keyboard controls
+								window.setTimeout(() => launchApp(app), 10);
+								setIsOpen(false);
+							}}
+						/>
+					</motion.div>
+				) : null}
+			</AnimatePresence>
 		</div>
 	);
 }
