@@ -21,7 +21,8 @@
 	position: relative;
 }
 
-.appList > li:hover > .appList.floating {
+.appList > li:hover > .appList.floating,
+.appList > li:focus-within > .appList.floating {
 	display: block;
 }
 

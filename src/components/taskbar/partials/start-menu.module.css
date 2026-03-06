@@ -7,7 +7,6 @@
 
 .startButton {
 	composes: outset from '@/app/page.module.css';
-
 	height: 100%;
 	padding: 3px;
 	box-sizing: border-box;

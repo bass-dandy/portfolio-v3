@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import classnames from 'classnames';
 
-import ArrowKeyFocus from '../arrow-key-focus';
+import useArrowKeyFocus from '@/hooks/useArrowKeyFocus';
 import Me from './partials/me';
 import Contact from './partials/contact';
 
@@ -21,24 +21,25 @@ const TABS = [
 const AboutMe: React.FC = () => {
 	const [activeTab, setActiveTab] = useState(0);
 	const {TabComponent} = TABS[activeTab];
+	const containerRef = useRef(null);
+
+	useArrowKeyFocus(containerRef);
 
 	return (
 		<div className={styles.aboutMe}>
-			<div className={styles.tabs}>
-				<ArrowKeyFocus preventTab>
-					{ TABS.map((tab, i) => (
-						<button
-							key={tab.label}
-							className={classnames(styles.tab, {
-								[styles.activeTab]: activeTab === i
-							})}
-							onClick={() => setActiveTab(i)}
-							onFocus={() => setActiveTab(i)}
-						>
-							<h3>{tab.label}</h3>
-						</button>
-					)) }
-				</ArrowKeyFocus>
+			<div ref={containerRef} className={styles.tabs}>
+				{TABS.map((tab, i) => (
+					<button
+						key={tab.label}
+						className={classnames(styles.tab, {
+							[styles.activeTab]: activeTab === i
+						})}
+						onClick={() => setActiveTab(i)}
+						onFocus={() => setActiveTab(i)}
+					>
+						<h3>{tab.label}</h3>
+					</button>
+				))}
 			</div>
 			<div className={styles.contentOuter}>
 				<div className={styles.contentInner}>
