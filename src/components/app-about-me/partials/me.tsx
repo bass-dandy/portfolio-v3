@@ -47,7 +47,6 @@ const Me: React.FC = () => (
 		<p className={styles.paragraph}>
 			This website is written with React, TypeScript, Motion, and Immer, built to a static export with Next.js, and hosted on GitHub.
 			Behold its vital <a href="https://github.com/bass-dandy/portfolio-v3" target="blank">source code</a> at your leisure.
-			No generative AI was used in the creation of this website or any others I&apos;ve made.
 		</p>
 	</div>
 );
